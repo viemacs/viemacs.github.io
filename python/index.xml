@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pythons on Viemacs Docs</title>
+    <link>./python/</link>
+    <description>Recent content in Pythons on Viemacs Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Jul 2017 11:51:17 +0800</lastBuildDate>
+    
+	<atom:link href="./python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Index</title>
+      <link>./python/</link>
+      <pubDate>Sat, 22 Jul 2017 11:51:17 +0800</pubDate>
+      
+      <guid>./python/</guid>
+      <description>Python Class 自带函数 class Foor(object): def __init__(self, *args, **kwargs): print(&amp;#39;init&amp;#39;) super(Bar, self).__init__(*args, **kwargs) def __new__(cls, *args, **kwargs): print(&amp;#39;new&amp;#39;) return super(Bar, cls).__new__(cls, *args, **kwargs) def __call__(self, *args, **kwargs): print(&amp;#39;call&amp;#39;) foo = Bar() foo() # Result: new init call   __init__(self, *args, **kwargs)
+在对象创建完成后调用，对当前对象实例进行初始化，无返回值。
+ __new__(cls, *args, **kwargs)
+创建对象时调用，返回当前对象的一个实例。
+ __call__(self, *args, **kwargs)
+重载括号运算符。类实现了call方法，则其对象可当作函数使用。
+  用自带函数实现单例 class MySingleton(object): def __new__(cls, *args, **kwargs): if not &amp;#39;_instance&amp;#39; in vars(cls): cls._instance = super(MySingleton, cls).</description>
+    </item>
+    
+  </channel>
+</rss>
