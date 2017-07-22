@@ -1,0 +1,9 @@
+* text eol=lf
+*.png binary
+*.jpg binary
+*.svg binary
+*.ico binary
+*.html binary
+*.xml binary
+*.css binary
+*.js binary
