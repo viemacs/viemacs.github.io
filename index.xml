@@ -24,6 +24,16 @@ This example API documentation page was created with DocuAPI, a multilingual doc
     
     <item>
       <title>Errors</title>
+      <link>./editor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./editor/</guid>
+      <description>Emacs asdf init.el asdf
+This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first. The Kittn API uses the following error codes:</description>
+    </item>
+    
+    <item>
+      <title>Errors</title>
       <link>./errors/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -53,18 +63,9 @@ This example API documentation page was created with DocuAPI, a multilingual doc
       <pubDate>Fri, 21 Jul 2017 23:10:37 +0800</pubDate>
       
       <guid>./network/</guid>
-      <description> index of network header 2 inline code
+      <description> Network header 2 inline code
 int main(){return 0;}  some code in python
 def foo(): pass  </description>
-    </item>
-    
-    <item>
-      <title>Index</title>
-      <link>./network/zwei/</link>
-      <pubDate>Fri, 21 Jul 2017 23:10:37 +0800</pubDate>
-      
-      <guid>./network/zwei/</guid>
-      <description> header 2 from zwei </description>
     </item>
     
     <item>
@@ -83,6 +84,18 @@ def foo(): pass  </description>
       
       <guid>./about/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./editor/vim_shortcuts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./editor/vim_shortcuts/</guid>
+      <description>http://www.cnblogs.com/jikey/archive/2011/12/28/2304341.html
+一. 移动： h,j,k,l: 左，下，上，右。 w: 下一个词的词首。 e:下一个词的词尾。 b:上一个词的词首。 &amp;lt;&amp;gt;: v 模式选中后进行缩进。 二. 跳转： %: 可以匹配{},&amp;ldquo;&amp;rdquo;,(),[]之间跳转。 H、M、L：直接跳转到当前屏幕的顶部、中部、底部。 #H：跳转到当前屏的第#行。 #L：跳转到当前屏的倒数第#行。 zt: 当前编辑行置为屏顶。 zz: 当前编辑行置为屏中。 zb: 当前编辑行置为屏底。 G：直接跳转到文件的底部。 gg: 跳转到文件首。 ():跳转到当前的行首、行尾。 {}：向上、向下跳转到最近的空行。 [{：跳转到目前区块开头。 ]}：跳转到目前区块结尾。 0: 跳转到行首。 $: 跳转到行尾。 2$: 跳转到下一行的行尾。 #：跳转到该行的第#个位置。 #G: 15G,跳转到15行。 :#：跳转到#行。 f&amp;rsquo;n&amp;rsquo;：跳转到下一个&amp;rdquo;n&amp;rdquo;字母后。 ctrl+b: 向后翻一页。 ctrl+f：向前翻一页。 ctrl+u: 向后翻半页。 ctrl+d: 向前翻半页。 ctry+e: 下滚一行。
+三. 选择： 1.V: 选择一行。 2.^V: 矩形选择。 3.v3w: 选择三个字符。
+四. 编辑： 1. 新增： i: 光标前插入。 I: 在当前行首插入。 a: 光标后插入。 A: 当前行尾插入。 O: 在当前行之前插入新行。 o: 在当前行之后插入新行。 2.</description>
     </item>
     
   </channel>

@@ -17,18 +17,9 @@
       <pubDate>Fri, 21 Jul 2017 23:10:37 +0800</pubDate>
       
       <guid>./network/</guid>
-      <description> index of network header 2 inline code
+      <description> Network header 2 inline code
 int main(){return 0;}  some code in python
 def foo(): pass  </description>
-    </item>
-    
-    <item>
-      <title>Index</title>
-      <link>./network/zwei/</link>
-      <pubDate>Fri, 21 Jul 2017 23:10:37 +0800</pubDate>
-      
-      <guid>./network/zwei/</guid>
-      <description> header 2 from zwei </description>
     </item>
     
     <item>
