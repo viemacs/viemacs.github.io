@@ -27,6 +27,10 @@
   </url>
   
   <url>
+    <loc>./js/access/</loc>
+  </url>
+  
+  <url>
     <loc>./tools/access/</loc>
   </url>
   
@@ -55,6 +59,10 @@
   </url>
   
   <url>
+    <loc>./js/es2015/</loc>
+  </url>
+  
+  <url>
     <loc>./algorithm/</loc>
     <priority>0</priority>
   </url>
@@ -66,6 +74,11 @@
   
   <url>
     <loc>./editor/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>./js/</loc>
     <priority>0</priority>
   </url>
   

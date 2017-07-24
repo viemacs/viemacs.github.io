@@ -69,6 +69,15 @@ This example API documentation page was created with DocuAPI, a multilingual doc
     </item>
     
     <item>
+      <title>JS</title>
+      <link>./js/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/access/</guid>
+      <description> Javascript </description>
+    </item>
+    
+    <item>
       <title>Tools</title>
       <link>./tools/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -130,6 +139,19 @@ def foo(): pass  </description>
       
       <guid>./about/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./js/es2015/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/es2015/</guid>
+      <description>Core Features of ES2015 (ES6) Note on Adrain Mejia&amp;rsquo;s article
+History ES6, a.k.a. ES2015+, ECMAScript6.
+Javascript is evolving since it was created, and ES6 is now well supported in all modern browsers.
+(compatibility ref)
+ES6 core features block-scoped variables We know that var is not block-scoped, but function scoped. In ES6, let and const is used instead of var to limit variable scoped to block. let is the better var A variable must be defined before use when it&amp;rsquo;s defined by let, and it exists only inside its block, like a for-loop or if-block.</description>
     </item>
     
   </channel>
