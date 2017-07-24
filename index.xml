@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Viemacs Docs</title>
+    <title>Viemacs Notes</title>
     <link>./</link>
-    <description>Recent content on Viemacs Docs</description>
+    <description>Recent content on Viemacs Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Jul 2017 11:51:17 +0800</lastBuildDate>
@@ -20,6 +20,24 @@
       <description>Introduction Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
 We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 This example API documentation page was created with DocuAPI, a multilingual documentation theme for the static site generator Hugo.</description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>./algorithm/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./algorithm/access/</guid>
+      <description> Algorithm </description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>./algorithm/huffman/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./algorithm/huffman/</guid>
+      <description>Huffman Encoding class Node(object): def __init__(self, symbol = &amp;#39;&amp;#39;, weight = 0, left = None, right = None): self.symbol, self.weight, self.left, self.right = symbol, weight, left, right if (left and right): self.weight = left.weight + right.weight def result(self, code = &amp;#39;&amp;#39;): r = [] self.symbol and r.append((self.symbol, self.weight, code)) self.left and r.extend(self.left.result(code + &amp;#39;0&amp;#39;)) self.right and r.extend(self.right.result(code + &amp;#39;1&amp;#39;)) return r def genHuffman(char, freq): nodeList = [] for i in range(len(char)): nodeList.</description>
     </item>
     
     <item>
@@ -48,6 +66,26 @@ This example API documentation page was created with DocuAPI, a multilingual doc
       <guid>./errors/</guid>
       <description>Errors This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first. The Kittn API uses the following error codes:
    Error Code Meaning     400 Bad Request &amp;ndash; Your request sucks   401 Unauthorized &amp;ndash; Your API key is wrong   403 Forbidden &amp;ndash; The kitten requested is hidden for administrators only   404 Not Found &amp;ndash; The specified kitten could not be found   405 Method Not Allowed &amp;ndash; You tried to access a kitten with an invalid method   406 Not Acceptable &amp;ndash; You requested a format that isn&amp;rsquo;t json   410 Gone &amp;ndash; The kitten requested has been removed from our servers   418 I&amp;rsquo;m a teapot   429 Too Many Requests &amp;ndash; You&amp;rsquo;re requesting too many kittens!</description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>./tools/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./tools/access/</guid>
+      <description> Tools </description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>./tools/makefile/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./tools/makefile/</guid>
+      <description>Makefile Make Basic make is designed to manage the compiling process based on dependencies. The other functions of make is designed to make it easier to write Makefile.
+When we deal with a complex project, there might be lots of source files, header files, lib files, target files. The files have a certain dependency relationship.
+$ gcc -c -o test.o test.c $ gcc -o helloworld test.o  The dependency line is: test.</description>
     </item>
     
     <item>
