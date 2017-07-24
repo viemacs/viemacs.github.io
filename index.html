@@ -585,221 +585,58 @@ ctry+e: 下滚一行。
 
 <h1 id="javascript">Javascript</h1>
 
-    
-        
+<h2 id="thoughts">Thoughts</h2>
 
-<h1 id="tools">Tools</h1>
+<h3 id="why-javascript">Why JavaScript</h3>
 
-    
-        
+<p>I use JavaScript to develop products because it seems faster and easier.
+Use web browsers as JVM, use DOM to build UI, and sue JS to implement business logic.</p>
 
-<h2 id="makefile">Makefile</h2>
+<h3 id="react">React</h3>
 
-<h3 id="make-basic">Make Basic</h3>
+<p>React provides a different way of organize frontend codes. And I like it very much.</p>
 
-<p><em>make</em> is designed to manage the compiling process based on dependencies. The other functions of make is designed to make it easier to write Makefile.</p>
+<p>Before writing WebApp, my programming practice uses Cpp mostly.
+So class and components are very handy, and very easy to understand.
+Different from the noodle of Vanilla JS in complex application,
+React divides the system to proper components, and makes the data flow in one direction only.</p>
 
-<hr />
+<p>Since more services are moved to Cloud, there are more business-oriented applications
+which are more complex than client/consumer oriented apps.
+React can make some real differences in these fields.</p>
 
-<p>When we deal with a complex project, there might be lots of source files, header files, lib files, target files.
-The files have a certain dependency relationship.</p>
+<h3 id="vanilla-js">Vanilla JS</h3>
 
-<pre><code>$ gcc -c -o test.o test.c
-$ gcc -o helloworld test.o
-</code></pre>
+<p>Some time it seems Vanilla JS is not important, bacause lib like jQuery wrapped up many things.
+During the early stage of developing an app, you might need to find certain libs to solve the problems you are facing.
+When you put those codes together, you might encounter problems, and to handle those problems, Vanilla JS is very helpful in locating the problem and finger out what&rsquo;s wrong.</p>
 
-<p>The dependency line is: <code>test.c</code> -&gt; <code>test.o</code> -&gt; <code>helloworld</code>.</p>
+<p>Another thing is if you need to glue some modules together, sometimes you need to use Vanilla JS to do the job, instead of find another lib to glue modules.</p>
 
-<p>When dealing with many files, the compiler is called many times. We build the files on which is depended, then build target files on top of that.</p>
+<h3 id="react-createclass-vs-component">React createClass vs Component</h3>
 
-<p>And <em>make</em> is a tool to automatically record and process the dependency.
-The dependency relationship is written in the Makefile file, and <em>make</em> will compile the files w.r.t. the dependency described in Makefile.</p>
+<p>ES6 class might be just a syntactic sugar instead of real class, but things are headed towards this way.
+I choose to write my code the ES6 way when it&rsquo;s convenient.
+As to Component, it&rsquo;s neater than createClass.
+No trailing comma, less extra parentheses, and easier to read.</p>
 
-<h4 id="dependency">Dependency</h4>
+<p><a href="https://reactjsnews.com/composing-components" title="React.Component vs React.createClass">Ref</a></p>
 
-<p>Here is a basic Makeifle</p>
+<h2 id="number">Number</h2>
 
-<pre><code># target binary file: helloworld
-helloworld: test.o
-	echo &quot;good&quot;
-	gcc -o helloworld test.o
-
-test.o: test.c
-	gcc -c -o test.o test.c
-</code></pre>
-
-<ul>
-<li># starts a comment line</li>
-<li>a target depends on its prerequisite. Multiple files are separated by spaces.</li>
-<li>The lines indented by Tab are operations to implement a dependency relationship. These operations are normal Shell commands.</li>
-</ul>
-
-<p><em>make</em> is a recursive process.</p>
+<h3 id="integer">Integer</h3>
 
 <blockquote>
-<ul>
-<li>If the current dependency has not prerequisite, then execute operations directly.</li>
-<li>If the current dependency has prerequisite, and the required files exist and have not been changed since the last make (judged by write-timestamp), then execute operations directly.</li>
-<li>If the required files of the current dependency do not exist, or have been changed, then use the required files as target files, and search their dependency, create target files.</li>
-</ul>
+<p>环境 64位 Linux, nodejs v7.2.1</p>
 </blockquote>
 
-<h4 id="macro">Macro</h4>
-
-<p>Macro in <em>make</em> is text-type variable.</p>
-
-<pre><code>CC = gcc
-helloworld: test.o
-　　echo &quot;good&quot;
-　　$(CC) -o helloworld test.o
-
-test.o: test.c
-　　$(CC) -c -o test.o test.c
-</code></pre>
-
-<h4 id="inner-macro">Inner Macro</h4>
-
 <ul>
-<li><code>$@</code> is target filename of the current dependency.</li>
-<li><code>$^</code> is required filenames of the current dependency.</li>
-<li><code>$*</code> target filename without suffix of the current dependency</li>
-<li><code>$*</code> the changed files in the current dependency</li>
-<li><code>$$</code> character $</li>
-<li><code>$(@D)</code> directory of file path</li>
-<li><code>$(@F)</code> filename of file path</li>
+<li>16位数 可以正确显示</li>
+<li>17位数 17位上开始失准; 然后归双; 然后舍入, 17位为0</li>
+<li>18-22位数 16位后直接丢失, 变为0</li>
+<li>23位以上, 变为浮点数, 进行 parseInt() 会出错</li>
 </ul>
 
-<pre><code>CC = gcc
-helloworld: test.o
-　　echo $@
-　　$(CC) -o $@ $^
-
-test.o: test.c
-　　$(CC) -c -o $@ $^
-</code></pre>
-
-<h4 id="suffix-dependency">Suffix Dependency</h4>
-
-<pre><code>CC = gcc
-
-.SUFFIXES: .c .o
-
-.c.o:
-	$(CC) -c -o $@ $^
-
-#--------------------------
-helloworld: test.o
-	echo $@
-	$(CC) -o $@ $^
-
-test.o: test.c
-</code></pre>
-
-<p><code>.c.o</code> means <code>.c</code> is prerequisite, and <code>.o</code> is target.
-<em>make</em> will find test.o and test.c has dependency, and will execute operation for this dependency.</p>
-
-<p>Suffix dependency is very handy is big projects.</p>
-
-<h4 id="misc">Misc</h4>
-
-<p>Special dependency in makefile.</p>
-
-<p>all: if <em>make</em> was followed by no filename, &ldquo;all&rdquo; will be chosen.</p>
-
-<p>clean: it is used to clean legacy files.</p>
-
-<pre><code>CC = gcc
-
-.SUFFIXES: .c .o
-
-.c.o:
-        $(CC) -c -o $@ $^
-
-#--------------------------
-
-all: helloworld
-        @echo &quot;ALL&quot;
-
-helloworld: test.o
-        @echo $@
-        $(CC) -o $@ $^
-
-test.o: test.c
-
-clean:
-        -rm helloworld *.o
-</code></pre>
-
-<p>&rsquo;@&rsquo; will hide the following command itself.
-&lsquo;-&rsquo; will ignore the stderr of the following command.</p>
-
-    
-        
-
-<h1 id="python">Python</h1>
-
-<h2 id="class-自带函数">Class 自带函数</h2>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">Foor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call&#39;</span><span class="p">)</span>
-        
-<span class="n">foo</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">()</span>
-<span class="n">foo</span><span class="p">()</span>
-
-<span class="c1"># Result:</span>
-<span class="n">new</span>
-<span class="n">init</span>
-<span class="n">call</span>
-</code></pre></div>
-
-<ul>
-<li><p><code>__init__(self, *args, **kwargs)</code><br />
-在对象创建完成后调用，对当前对象实例进行初始化，无返回值。</p></li>
-
-<li><p><code>__new__(cls, *args, **kwargs)</code><br />
-创建对象时调用，返回当前对象的一个实例。</p></li>
-
-<li><p><code>__call__(self, *args, **kwargs)</code><br />
-重载括号运算符。类实现了call方法，则其对象可当作函数使用。</p></li>
-</ul>
-
-<h2 id="用自带函数实现单例">用自带函数实现单例</h2>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">MySingleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;_instance&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MySingleton</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
-</code></pre></div>
-
-    
-        
-
-<h1 id="network">Network</h1>
-
-<h2 id="header-2">header 2</h2>
-
-<p><strong>inline code</strong></p>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span><span class="k">return</span> <span class="mi">0</span><span class="p">;}</span>
-</code></pre></div>
-
-<p><em>some code in python</em></p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
-    <span class="k">pass</span>
-    
-</code></pre></div>
-
-    
-        
-    
-        
     
         
 
@@ -1202,6 +1039,283 @@ console.log([...array1, ...array2, ...array3]);
 </code></pre>
 
 <hr />
+
+    
+        
+
+<h1 id="tools">Tools</h1>
+
+    
+        
+
+<h2 id="makefile">Makefile</h2>
+
+<h3 id="make-basic">Make Basic</h3>
+
+<p><em>make</em> is designed to manage the compiling process based on dependencies. The other functions of make is designed to make it easier to write Makefile.</p>
+
+<hr />
+
+<p>When we deal with a complex project, there might be lots of source files, header files, lib files, target files.
+The files have a certain dependency relationship.</p>
+
+<pre><code>$ gcc -c -o test.o test.c
+$ gcc -o helloworld test.o
+</code></pre>
+
+<p>The dependency line is: <code>test.c</code> -&gt; <code>test.o</code> -&gt; <code>helloworld</code>.</p>
+
+<p>When dealing with many files, the compiler is called many times. We build the files on which is depended, then build target files on top of that.</p>
+
+<p>And <em>make</em> is a tool to automatically record and process the dependency.
+The dependency relationship is written in the Makefile file, and <em>make</em> will compile the files w.r.t. the dependency described in Makefile.</p>
+
+<h4 id="dependency">Dependency</h4>
+
+<p>Here is a basic Makeifle</p>
+
+<pre><code># target binary file: helloworld
+helloworld: test.o
+	echo &quot;good&quot;
+	gcc -o helloworld test.o
+
+test.o: test.c
+	gcc -c -o test.o test.c
+</code></pre>
+
+<ul>
+<li># starts a comment line</li>
+<li>a target depends on its prerequisite. Multiple files are separated by spaces.</li>
+<li>The lines indented by Tab are operations to implement a dependency relationship. These operations are normal Shell commands.</li>
+</ul>
+
+<p><em>make</em> is a recursive process.</p>
+
+<blockquote>
+<ul>
+<li>If the current dependency has not prerequisite, then execute operations directly.</li>
+<li>If the current dependency has prerequisite, and the required files exist and have not been changed since the last make (judged by write-timestamp), then execute operations directly.</li>
+<li>If the required files of the current dependency do not exist, or have been changed, then use the required files as target files, and search their dependency, create target files.</li>
+</ul>
+</blockquote>
+
+<h4 id="macro">Macro</h4>
+
+<p>Macro in <em>make</em> is text-type variable.</p>
+
+<pre><code>CC = gcc
+helloworld: test.o
+　　echo &quot;good&quot;
+　　$(CC) -o helloworld test.o
+
+test.o: test.c
+　　$(CC) -c -o test.o test.c
+</code></pre>
+
+<h4 id="inner-macro">Inner Macro</h4>
+
+<ul>
+<li><code>$@</code> is target filename of the current dependency.</li>
+<li><code>$^</code> is required filenames of the current dependency.</li>
+<li><code>$*</code> target filename without suffix of the current dependency</li>
+<li><code>$*</code> the changed files in the current dependency</li>
+<li><code>$$</code> character $</li>
+<li><code>$(@D)</code> directory of file path</li>
+<li><code>$(@F)</code> filename of file path</li>
+</ul>
+
+<pre><code>CC = gcc
+helloworld: test.o
+　　echo $@
+　　$(CC) -o $@ $^
+
+test.o: test.c
+　　$(CC) -c -o $@ $^
+</code></pre>
+
+<h4 id="suffix-dependency">Suffix Dependency</h4>
+
+<pre><code>CC = gcc
+
+.SUFFIXES: .c .o
+
+.c.o:
+	$(CC) -c -o $@ $^
+
+#--------------------------
+helloworld: test.o
+	echo $@
+	$(CC) -o $@ $^
+
+test.o: test.c
+</code></pre>
+
+<p><code>.c.o</code> means <code>.c</code> is prerequisite, and <code>.o</code> is target.
+<em>make</em> will find test.o and test.c has dependency, and will execute operation for this dependency.</p>
+
+<p>Suffix dependency is very handy is big projects.</p>
+
+<h4 id="misc">Misc</h4>
+
+<p>Special dependency in makefile.</p>
+
+<p>all: if <em>make</em> was followed by no filename, &ldquo;all&rdquo; will be chosen.</p>
+
+<p>clean: it is used to clean legacy files.</p>
+
+<pre><code>CC = gcc
+
+.SUFFIXES: .c .o
+
+.c.o:
+        $(CC) -c -o $@ $^
+
+#--------------------------
+
+all: helloworld
+        @echo &quot;ALL&quot;
+
+helloworld: test.o
+        @echo $@
+        $(CC) -o $@ $^
+
+test.o: test.c
+
+clean:
+        -rm helloworld *.o
+</code></pre>
+
+<p>&rsquo;@&rsquo; will hide the following command itself.
+&lsquo;-&rsquo; will ignore the stderr of the following command.</p>
+
+    
+        
+
+<h1 id="python">Python</h1>
+
+<h2 id="class-自带函数">Class 自带函数</h2>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">Foor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call&#39;</span><span class="p">)</span>
+        
+<span class="n">foo</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">()</span>
+<span class="n">foo</span><span class="p">()</span>
+
+<span class="c1"># Result:</span>
+<span class="n">new</span>
+<span class="n">init</span>
+<span class="n">call</span>
+</code></pre></div>
+
+<ul>
+<li><p><code>__init__(self, *args, **kwargs)</code><br />
+在对象创建完成后调用，对当前对象实例进行初始化，无返回值。</p></li>
+
+<li><p><code>__new__(cls, *args, **kwargs)</code><br />
+创建对象时调用，返回当前对象的一个实例。</p></li>
+
+<li><p><code>__call__(self, *args, **kwargs)</code><br />
+重载括号运算符。类实现了call方法，则其对象可当作函数使用。</p></li>
+</ul>
+
+<h2 id="用自带函数实现单例">用自带函数实现单例</h2>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">MySingleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;_instance&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MySingleton</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
+</code></pre></div>
+
+    
+        
+
+<h1 id="network">Network</h1>
+
+<h2 id="header-2">header 2</h2>
+
+<p><strong>inline code</strong></p>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span><span class="k">return</span> <span class="mi">0</span><span class="p">;}</span>
+</code></pre></div>
+
+<p><em>some code in python</em></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">pass</span>
+    
+</code></pre></div>
+
+    
+        
+    
+        
+    
+        
+
+<h2 id="practice-of-javascript-performance">Practice of JavaScript Performance</h2>
+
+<p>Since JavaScript becomes a fullstack programming language, in certain cases the performance of JS is critical. Here are some practice of JS, with some understanding of JS implementation.</p>
+
+<h3 id="data-store">Data Store</h3>
+
+<p>How a variable is create will effect its performance.
+- Use <em>{}</em> instead of <em>new Object</em>, use <em>[]</em> instead of new Array, use plain string instead of an object.
+- Use local temporary variable to store variable deep upon the data-chain, and values require many calculation.
+- dot-present has a similar performance as member operator, and it&rsquo;s faster in Safari. object.name vs object[name], object.name is always faster.</p>
+
+<h3 id="loop">Loop</h3>
+
+<p>In Chromium v54, <code>for-in</code> is slower, and <code>for (var i = 0; i &lt; length; ++i)</code>, <code>[].forEach(()=&gt;{})</code> have similar performance. forEach is much faster than it was in earlier browser.</p>
+
+<h3 id="event-delegate">Event Delegate</h3>
+
+<p>It will cause too much loads and occupy too many memory binding the same event to massive elements in the page.
+It better to bind event to the outer layer, and deal with all events of its child elements.</p>
+
+<pre><code>document.getElementById('content').addEventListener('click', function(evt) {
+    evt = evt || window.event;
+    let target = evt.target || evt.srcElement;
+    if (target.nodeName.toLowerCase() !== 'a')
+        return;
+    console.log(target.href);
+});
+</code></pre>
+
+<h3 id="re-render">Re-Render</h3>
+
+<p>The source files create 2 trees in browser: DOM tree and Render tree.
+Render tree deal with DOM geometry attributions. When the style of DOM changes, browser re-render the DOM.</p>
+
+<pre><code>bodystyle = document.body.style; 
+bodystyle.color = red; 
+bodystyle.height = 1000px; 
+bodystyke.width = 100%;
+</code></pre>
+
+<p>Three times of modification will cause 3 re-renders. Under certain circumstances, reduce the times of modification will improve rendering performance.</p>
+
+<pre><code>bodystyle = document.body.style; 
+bodystyle.cssText 'color:red;height:1000px;width:100%';
+</code></pre>
+
+<h3 id="javascript-load">JavaScript Load</h3>
+
+<p>&lt;script&gt; tag might block something from downloading, so it&rsquo;s a good practice to put more script tag at the bottom of DOM, to avoid the time of empty page displayed to users.</p>
+
+<h3 id="javascript-deployment">JavaScript Deployment</h3>
+
+<p>Reduce the number of requirements and the file sizes will accelerate the page loading speed.
+For example, use <em>webpack</em> and <em>uglify</em>.</p>
+
+<h3 id="cache-js-files">Cache JS Files</h3>
+
+<p>Cached files will improve the speed of page loading. Web servers use &ldquo;Expires HTTP Resonse Header&rdquo; to tell browser how long a resource should be cached. To avoid the problem of using old version of file, you can change the filename of static resource, like bundle-201612242359.js, using a timestamp to force browser to load the new js file.</p>
 
     
 
