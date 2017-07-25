@@ -93,6 +93,17 @@ ES6 core features block-scoped variables We know that var is not block-scoped, b
     </item>
     
     <item>
+      <title>JS</title>
+      <link>./js/expressjs_note/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/expressjs_note/</guid>
+      <description>Note on Express Basic Routing A route method is derived from one of the HTTP methods, and is attached to an instance of the express class.
+Route methods Express supports the following routing methods that correspond to HTTP methods: get, post, put, head, delete, options, trace, copy, lock, mkcol, move, purge, propfind, proppatch, unlock, report, mkactivity, checkout, merge, m-search, notify, subscribe, unsubscribe, patch, search, and connect.
+To route methods that translate to invalid JavaScript variable names, use the bracket notation.</description>
+    </item>
+    
+    <item>
       <title>Tools</title>
       <link>./tools/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
