@@ -671,6 +671,24 @@ Memory management is done indirectly via breaking references.</p>
 <li>Non-configurable properties cannot be <em>deleted</em>, which includes properties of built-in objects like <em>Math</em>, <em>Array</em>, <em>Object</em>, and properties created by Objects.defineProperty().</li>
 </ul>
 
+<h2 id="array">Array</h2>
+
+<h3 id="array-loop">Array Loop</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">;</span>
+
+<span class="nx">arr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{});</span>
+
+<span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">e</span><span class="p">});</span>
+
+<span class="nx">arr</span><span class="p">.</span><span class="nx">every</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">e</span><span class="p">});</span>
+
+<span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">e</span><span class="p">});</span>
+</code></pre></div>
+
     
         
 
@@ -1226,6 +1244,226 @@ app.use('/birds', birds)
 <p>The app will now be able to handle requests to /birds and /birds/about, as well as call the timeLog middleware function that is specific to the route.</p>
 
 <hr />
+
+    
+        
+
+<h2 id="an-introduction-to-webpack">An Introduction to Webpack</h2>
+
+<p><strong>Webpack</strong> is a bundler for javascript, and related resources.
+All resources are treated as modules, and with various <em>loaders</em>,
+webpack can handle modules of CommonJs, AMD, ES6, CSS, Image, JSON, Coffeescript, LESS, etc.</p>
+
+<pre><code>// what a webpack config file 'webpack.config.js' looks like
+module: {
+  loaders: [
+    { test: /\.css$/, loader: 'style!css' }, // use ! to chain loaders
+    { test: /\.js$/, loader: 'jsx?harmony!babel', exclude: /node_modules/ }
+    // loaders can be written like 'jsx-loader' or 'jsx'
+    // loaders can take parameters as a querystring
+  ]
+}
+</code></pre>
+
+<p>Entrance and output.</p>
+
+<pre><code>// webpack.config.js
+module.exports = {
+  entry: './entry.js',
+  output: {
+    filename: 'bundle.js'
+  }
+};
+</code></pre>
+
+<p>Filename extensions.</p>
+
+<pre><code>// webpack.config.js
+module.exports = {
+  entry: 'entry.js',
+  output: {
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: ['', '.js]
+    // require('./foo') will search module with filename './foo' and './foo.js'
+  }
+}
+</code></pre>
+
+<h3 id="require-a-module">require a module</h3>
+
+<pre><code>require('foo') // from module directory
+require('./bar') // from relative path
+
+define (require, exports.module) -&gt;
+  require('foo')
+  require('./bar)
+</code></pre>
+
+<h4 id="module-shim">module shim</h4>
+
+<p>To require modules from <code>window</code>, you might need <code>expose-loader</code>.
+Take jQuery for example</p>
+
+<pre><code>{ test: require.resolve('jquery'), loader: 'expose?jQuery' }
+</code></pre>
+
+<h3 id="css-and-image">CSS and Image</h3>
+
+<p>Write loader and require them as normal modules.</p>
+
+<pre><code>// webpack.config.js
+module.exports = {
+  entry: 'entry.js',
+  output: {
+    path: './build', // for output processed images and resources
+    publicPath: 'http://mycdn.com/', // for generate URLs to resources
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [
+      { test: /\.js$/, loader: 'jsx?harmony!babel', exclude: /node_modules/ }
+      { test: /\.css$/, loader: 'style!css },
+      { test: /\.less$/, loader: 'style!css!less },
+      { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
+      // inline base64 URLs for &lt;=8k images, direct URLs for the rest
+    ]
+  }
+};
+</code></pre>
+
+<pre><code>require('./bootstrap.css');
+require('./style.less');
+
+let img = document.createElement('img');
+img.src = require('./logo.png');
+</code></pre>
+
+<h3 id="multi-package-and-shared-package">Multi-package and shared package</h3>
+
+<p>Shared packages are handled by <code>commonsPlugin</code>.</p>
+
+<pre><code>var CommonsChunkPlugin = require(&quot;webpack/lib/optimize/CommonsChunkPlugin&quot;);
+module.exports = {
+    entry: {
+        p1: &quot;./page1&quot;,
+        p2: &quot;./page2&quot;,
+        p3: &quot;./page3&quot;
+    },
+    output: {
+        filename: &quot;[name].entry.chunk.js&quot;
+    },
+    plugins: [
+        new CommonsChunkPlugin(&quot;commons.chunk.js&quot;)
+    ]
+}
+</code></pre>
+
+<h3 id="separated-css-package-http-webpack-github-io-docs-stylesheets-html-separate-css-bundle"><a href="http://webpack.github.io/docs/stylesheets.html#separate-css-bundle">Separated CSS package</a></h3>
+
+<h3 id="hash-js-files">Hash js files</h3>
+
+<p><em>One hash for the bundle</em>
+<code>webpack ./entry output.[hash].bundle.js</code></p>
+
+<pre><code>{
+    output: {
+        path: path.join(__dirname, &quot;assets&quot;, &quot;[hash]&quot;),
+        publicPath: &quot;assets/[hash]/&quot;,
+        filename: &quot;output.[hash].bundle.js&quot;,
+        chunkFilename: &quot;[id].[hash].bundle.js&quot;
+    }
+}
+</code></pre>
+
+<p><em>One hash per chunk</em> <code>--output-chunk-file [chunkhash].js</code></p>
+
+<pre><code>output: { chunkFilename: &quot;[chunkhash].bundle.js&quot; }
+</code></pre>
+
+<p><em>Get filenames from stats</em></p>
+
+<pre><code>plugins: [
+  function() {
+    this.plugin(&quot;done&quot;, function(stats) {
+      require(&quot;fs&quot;).writeFileSync(
+        path.join(__dirname, &quot;..&quot;, &quot;stats.json&quot;),
+        JSON.stringify(stats.toJson()));
+    });
+  }
+]
+</code></pre>
+
+<h3 id="options-for-product">Options for Product</h3>
+
+<p>You can specify a different config file for product-level bundling.
+<code>webpack --config webpack.min.js</code></p>
+
+<p>Compress the code. Loaders are switched into minimizing mode.
+<a href="http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin">Uglify</a></p>
+
+<pre><code>plugins: [
+   new webpack.optimize.MinChunkSizePlugin(minSize)
+]
+</code></pre>
+
+<pre><code>new webpack.optimize.UglifyJsPlugin([options])
+// e.g.
+new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+})
+</code></pre>
+
+<p>You can/should use normal npm React package instead of the precompiled library.
+Webpack can compress it to smaller size than react.min.js.</p>
+
+<pre><code>new webpack.DefinePlugin({
+  &quot;process.env&quot;: {
+    NODE_ENV: JSON.stringify(&quot;production&quot;)
+  }
+})
+</code></pre>
+
+<h4 id="hot-replace">Hot Replace</h4>
+
+<p>Include <code>webpack/hot/dev-server</code> in your project code, edit config file.</p>
+
+<pre><code>  entry: {
+    main: ['webpack/hot/dev-server', './entry],
+  },
+</code></pre>
+
+<p>Then start the server, and visit it at [<a href="http://localhost:8080/webpack-dev-server/">http://localhost:8080/webpack-dev-server/</a>].</p>
+
+<pre><code>webpack-dev-server --hot --quiet
+</code></pre>
+
+<p>And there is a <a href="http://gaearon.github.io/react-hot-loader/getstarted/"><strong>react-hot-loader</strong></a>.</p>
+
+<pre><code>entry: [
+  'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
+  'webpack/hot/only-dev-server',
+  './scripts/index' // Your appʼs entry point
+]
+</code></pre>
+
+<p>As for <code>only-dev-server</code>, the issue is replied <a href="https://github.com/gaearon/react-hot-loader/issues/73#issuecomment-73679446">here</a>.</p>
+
+<h3 id="miscellaneous">Miscellaneous</h3>
+
+<p>When webpack reports an error, but you cannot find out what&rsquo;s wrong, try this.</p>
+
+<pre><code>webpack --display-error-details
+</code></pre>
+
+<hr />
+
+<p>[Webpack list of loaders] <a href="http://webpack.github.io/docs/list-of-loaders.html">http://webpack.github.io/docs/list-of-loaders.html</a>
+<a href="https://github.com/webpack/docs/wiki/optimization#multi-page-app">optimization</a>
+[long term caching]<a href="http://webpack.github.io/docs/long-term-caching.html">http://webpack.github.io/docs/long-term-caching.html</a></p>
 
     
         

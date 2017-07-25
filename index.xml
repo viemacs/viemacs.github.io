@@ -104,6 +104,16 @@ To route methods that translate to invalid JavaScript variable names, use the br
     </item>
     
     <item>
+      <title>JS</title>
+      <link>./js/webpack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/webpack/</guid>
+      <description>An Introduction to Webpack Webpack is a bundler for javascript, and related resources. All resources are treated as modules, and with various loaders, webpack can handle modules of CommonJs, AMD, ES6, CSS, Image, JSON, Coffeescript, LESS, etc.
+// what a webpack config file &#39;webpack.config.js&#39; looks like module: { loaders: [ { test: /\.css$/, loader: &#39;style!css&#39; }, // use ! to chain loaders { test: /\.js$/, loader: &#39;jsx?harmony!babel&#39;, exclude: /node_modules/ } // loaders can be written like &#39;jsx-loader&#39; or &#39;jsx&#39; // loaders can take parameters as a querystring ] }  Entrance and output.</description>
+    </item>
+    
+    <item>
       <title>Tools</title>
       <link>./tools/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
