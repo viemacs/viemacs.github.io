@@ -169,6 +169,19 @@ def foo(): pass  </description>
     
     <item>
       <title></title>
+      <link>./js/develop-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/develop-environment/</guid>
+      <description>JS Development Environment 随着前端和 Node.JS 的发展, 以及页面的APP化, JS 成为开发应用的不错的选择. 前后通吃, 语法灵活, 发展迅速, 对提高开发效率很有帮助.
+JS 开发发展迅速带来的一个问题是工具和库众多, 开发中选择什么工具成了一个问题. 我从两年前真正开始写JS开始尝试了一些工具和库, 试过之后才知道什么更适合自己.
+编辑器 单就文本编辑器而言, 当然还是首推 Emacs 和 Vim. 除这两者之外, 还有许多不错和编辑器和IDE.
+ Sublime 比较灵活, 有插件, 可配置. 上手容易, 但要用上各种插件有点繁. Atom 比较适合前端技术栈, github 出品, 应该不错. 没真正用过. Brackets 使用时感觉很方便, web 预览功能很不错. 当时版本较早, 有一些bug, 现在应该更好用了. WebStorm 完整的 IDE 的样子, 对 JS 开发非常不错, 前端, Node.JS, git 都支持, 也有 emacs 模式. 用习惯之后对生产效率应该会有提升.  打包 打包包括了开发上线所需的预编译, 压缩, 转换, 优化, 构建任务.
+现在使用的是 Webpack.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>./js/performance/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
