@@ -692,6 +692,69 @@ Memory management is done indirectly via breaking references.</p>
     
         
 
+<h2 id="js-development-environment">JS Development Environment</h2>
+
+<p>随着前端和 Node.JS 的发展, 以及页面的APP化, JS 成为开发应用的不错的选择.
+前后通吃, 语法灵活, 发展迅速, 对提高开发效率很有帮助.</p>
+
+<p>JS 开发发展迅速带来的一个问题是工具和库众多, 开发中选择什么工具成了一个问题.
+我从两年前真正开始写JS开始尝试了一些工具和库, 试过之后才知道什么更适合自己.</p>
+
+<h3 id="编辑器">编辑器</h3>
+
+<p>单就文本编辑器而言, 当然还是首推 Emacs 和 Vim. 除这两者之外, 还有许多不错和编辑器和IDE.</p>
+
+<ul>
+<li>Sublime 比较灵活, 有插件, 可配置. 上手容易, 但要用上各种插件有点繁.</li>
+<li>Atom 比较适合前端技术栈, github 出品, 应该不错. 没真正用过.</li>
+<li>Brackets 使用时感觉很方便, web 预览功能很不错. 当时版本较早, 有一些bug, 现在应该更好用了.</li>
+<li>WebStorm 完整的 IDE 的样子, 对 JS 开发非常不错, 前端, Node.JS, git 都支持, 也有 emacs 模式. 用习惯之后对生产效率应该会有提升.</li>
+</ul>
+
+<h3 id="打包">打包</h3>
+
+<p>打包包括了开发上线所需的预编译, 压缩, 转换, 优化, 构建任务.</p>
+
+<p>现在使用的是 Webpack. 既然 Webpack 有丰富的loader, 方便的 API, 良好的生态环境, 为什么不用它呢?</p>
+
+<p>由于接触JS工程比较晚, 有 Webpack 可用, 对早期的 Grunt 和后来的 Gulp 并不了解.
+大家似乎是觉得 Grunt 配置麻烦, 效率不高, 于是转向 Gulp.
+还有就是使用 NPM 的构建方式, 我不怎么会用, 感觉和上面三种打包工具不属一类工具.
+在自己的工程中尝试使用过 Grunt 和 Gulp, 由于工程较小, 使用起来并没有感觉方便.
+在压缩js, 分发文件方面, 比自己写 Python 脚本更复杂.</p>
+
+<p>Grunt 要完成配置之后, 在日常开发中, 通过一个命令就能自动完成文件合并压缩, 上线构建, 在线重载(live-reload).
+在项目变得复杂之后, 仅靠配置难以满足需求, 只有增加插件配置项. 而越来越多的配置项使得Grunt的配置变得过于麻烦.</p>
+
+<p>Gulp 则是提供类 Linux 的文件流操作, 以编程的方式组建任务, 来解决越来越多的配置项的问题.</p>
+
+<hr />
+
+<h3 id="webpack-vue-心得">webpack + vue 心得</h3>
+
+<p>(ref: wechat 医小生与程序猿 (doctor_programmer))</p>
+
+<ol>
+<li><p><strong>要单页面还是多页面</strong>。我们的项目比较大，目录又多又深，如果用配合vue-router做成整体的单页面应用，必然会因多级嵌套路由而造成各种困扰。所以最终决定一个功能模块一个页面，各模块自己做成SPA。这个方案也为后面进行多入口打包带来了麻烦。</p></li>
+
+<li><p><strong>公共框架如何处理。</strong>  所谓公共框架就是像vue、jquery、bootstrap这的第三方框架。 它们基本不会改动，所以肯定是要单独打成一个包的，充分利用缓存。另外一个问题就是，这些框架的代码放哪里好，有人用bower管理，有人用npm管理，或者是像我们之前那样在项目中放一个lib目录，下载好框架代码后就放进去不动了。不过现在业界普遍都推commonjs规范了，所以用npm来管理是个趋势。</p></li>
+
+<li><p><strong>项目的公用组件如何打包。</strong>  既然是用vue，那肯定会写很多公共的组件了，这些组件肯定不能和第三方库打包到一起，也不要和业务代码打包在一起，因为业务代码总改动，而公共组件相对改动也比较少。最好是把所有的组件打成一个包。然而webpack的设计思想并不是这样，它是完全按照模块的依赖树来分析，根据依赖进行打包。我们的组件之间如果没有依赖，是没法打到一起的。</p></li>
+
+<li><p><strong>CommonsChunkPlugin的硬伤。</strong>  关于公用组件的处理，其实可以用CommonsChunkPlugin这个插件，它能自动分析出公共模块并打成一个包。但是这个插件有个硬伤，如果我写了一个名为popbox的组件，本意是想给项目公用，但是目前只有一个模块用到了它，那么插件并不能知道它是公用插件，而会把它和业务代码打包到一起。倘若将来有第二个模块用到了popbox，就又会把它打进公共包里，这显然是很弱智的行为。</p></li>
+
+<li><p><strong>entry只干入口的事。</strong>  我一开始想，把公共组件放entry中打包一下行不行，像这样配置：<code>components: ['loading', 'menu', 'box']</code>。结果证明是不能的，文件虽然能打包出来，但是没法用，就是你<code>&lt;script&gt;</code>标签把文件加到页面也不行，别的模块用require无法引用到。原因就是entry打包出的文件作为入口文件，必须包含直接运行的代码。</p></li>
+
+<li><p><strong>webpack-stream是个鸡肋。</strong>  一开始我被entry和output的各种配置整的摸不着头脑，因为项目目录多，想要更精细的控制，却发现output总是无法按我的需求输出。后来我看到了有webpack-stream这个东西，而且是官方推荐的。简单来讲，它就是实现了文件流接口，从而能与gulp配合工作，我一看这是个好东西啊。研究了一番，发现也没什么功能，就是能用gulp.src代替entry，用gulp.dest代替output，对于多入口打包，就完全没什么用了，还得在webpack中配置，所以简直就是个鸡肋。直接弃用。</p></li>
+
+<li><p><strong>这么多require用哪个。</strong>  一开始用webpack构建应用的时候，每当写require的时候我是懵逼的，有commonjs风格的require用法、AMD风格的require加回调用法，以及webpack提供的require.ensure用来打包异步加载的模块。另外还有ES6的import，既然都用vue了，我们肯定得用ES6嘛。这么多引入模块的方法，你得保持头脑清醒了，他们都有什么区别，什么场景下用哪个。</p></li>
+
+<li><p><strong>dist目录不是给人看的。</strong>  鉴于之前用gulp的习惯，打包后的目录也是有很清晰的结构，而且打包前我们src目录下的代码也是直接可运行的。但是有了webpack之后，首先src下的代码未经打包不能在开发环境运行，其次output选项只能指定一个输出目录，无法再按你的想法再进行组织。唯一有点用的方法是在entry中，把入口文件名字写成这样foo/bar/baz。勉强能在输出目录中新建出文件夹。但是总体来看，dist目录还是一团糟，尤其是异步的chunk文件，只能是id+hash这样的名字。所以我也明白了，要用webpack就别打算去看dist目录了，只能用sourcemap在浏览器看。</p></li>
+</ol>
+
+    
+        
+
 <h2 id="core-features-of-es2015-es6">Core Features of ES2015 (ES6)</h2>
 
 <p><span style="color:#999">Note on Adrain Mejia&rsquo;s article</span></p>
@@ -1468,6 +1531,298 @@ Webpack can compress it to smaller size than react.min.js.</p>
     
         
 
+<h2 id="another-webpack-note">Another Webpack Note</h2>
+
+<p><code>
+其实Webpack的入门指导文章非常多，配置方式也各有各样，这里我推荐题叶大神的入门级指南–Webpack 入门指迷，如果不知道Webpack是什么或者不是很清楚各项配置含义的开发者，可以看此文章扫扫盲。毕竟我这篇文章并不是特别基础。
+</code></p>
+
+<h3 id="1-base-js">1. base.js</h3>
+
+<p>var path = require(&lsquo;path&rsquo;)
+var baseConfig = {
+    resolve: {
+        extensions: [&ldquo;, &lsquo;.js&rsquo;],
+        fallback: [path.join(<strong>dirname, &lsquo;../node_modules&rsquo;)],
+        alias: {
+            &lsquo;src&rsquo;: path.resolve(</strong>dirname, &lsquo;../src&rsquo;),
+            &lsquo;assets&rsquo;: path.resolve(<strong>dirname, &lsquo;../src/assets&rsquo;),
+            &lsquo;components&rsquo;: path.resolve(</strong>dirname, &lsquo;../src/components&rsquo;)
+        }
+    },
+    module: {
+        loaders: [{
+            test: /.js$/,
+            loader: &lsquo;babel&rsquo;,
+            exclude: /node_modules/
+        }, {
+            test: /.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
+            loader: &lsquo;url?limit=8192&amp;context=client&amp;name=[path][name].[hash:7].[ext]&rsquo;
+        },
+        {
+            test: /.css$/,
+            loader: &lsquo;style!css!autoprefixer&rsquo;,
+        },
+        {
+            test: /.scss$/,
+            loader: &lsquo;style!css!autoprefixer!sass&rsquo;
+        }]
+    }
+};</p>
+
+<p>module.exports = baseConfig;</p>
+
+<p>`
+解读下这个基本配置：</p>
+
+<p>1、resolve 解析模块依赖的时候，受影响的配置项。</p>
+
+<p>extensions 决定了哪些文件后缀在引用的时候可以省略点，Webpack帮助你补全名称。
+fallback 当webpack在 root（默认当前文件夹，配置时要绝对路径） 和 modulesDirectories（默认当前文件夹，相对路径）配置下面找不到相关modules，去哪个文件夹下找modules
+alias 这个大家应该比较熟悉，requirejs之类的都有，就是别名，帮助你快速指向文件路径，少写不少代码，而且不用关心层级关系，需要注意的是：在scss之类的css预编译中引用要加上~，以便于让loader识别是别名引用路径。</p>
+
+<p>2、module 解析不同文件使用哪些loader，这个比较简单，很多文章都有，就不多说了，注意的是，这里的scss可以换成你自己的预编译器，例如：sass、less、stylus等，或者直接用postcss都行，当然还可以用一种通用方法，后面补上。
+`</p>
+
+<h3 id="2-开发环境配置-config">2. 开发环境配置 config</h3>
+
+<p>var webpack = require(&lsquo;webpack&rsquo;);
+var path = require(&lsquo;path&rsquo;)
+var merge = require(&lsquo;webpack-merge&rsquo;)
+var baseConfig = require(&lsquo;./webpack.base&rsquo;)
+var getEntries = require(&lsquo;./getEntries&rsquo;)</p>
+
+<p>var hotMiddlewareScript = &lsquo;webpack-hot-middleware/client?reload=true&rsquo;;</p>
+
+<p>var assetsInsert = require(&lsquo;./assetsInsert&rsquo;)</p>
+
+<p>module.exports = merge(baseConfig, {
+  entry: getEntries(hotMiddlewareScript),
+  devtool: &lsquo;#eval-source-map&rsquo;,
+  output: {
+    filename: &lsquo;./[name].[hash].js&rsquo;,
+    path: path.resolve(&lsquo;./dist&rsquo;),
+    publicPath:&lsquo;./dist&rsquo;
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      &lsquo;process.env&rsquo;: {
+        NODE_ENV: &lsquo;&ldquo;development&rdquo;&rsquo;
+      }
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new assetsInsert()
+  ]
+})</p>
+
+<p>`
+说说这个配置中的一些难点：</p>
+
+<p>1、getEntries 是用来配置入口文件，一般很多人是自己手写，或者SPA页面，只有一个入口， 很容易就写出来，但是公司中，很多情况，是需要多入口，也就是多路由的Url，这个时候入口的配置就比较麻烦，我这里是放单独一个文件里面配置，我们公司是靠规定来执行，也就是一个文件夹所有的main.js都认为是入口文件，其他都忽略。
+`</p>
+
+<p>function getEntry(hotMiddlewareScript) {
+    var pattern = paths.dev.js + &lsquo;project/**/main.js&rsquo;;
+    var array = glob.sync(pattern);
+    var newObj = {};</p>
+
+<pre><code>array.map(function(el){
+    var reg = new RegExp('project/(.*)/main.js','g');
+    reg.test(el);
+    if (hotMiddlewareScript) {
+        newObj[RegExp.$1] = [el, hotMiddlewareScript];
+    } else {
+        newObj[RegExp.$1] = el;
+    }
+});
+return newObj;
+</code></pre>
+
+<p>}</p>
+
+<p><code>
+2、assetsInsert 是用来做模板替换的，一个小插件把template里面的值替换成打包后的css或者js。
+</code></p>
+
+<h3 id="3-打包环境配置-production">3. 打包环境配置 production</h3>
+
+<p>var webpack = require(&lsquo;webpack&rsquo;);
+var path = require(&lsquo;path&rsquo;)
+var merge = require(&lsquo;webpack-merge&rsquo;)
+var baseConfig = require(&lsquo;./webpack.base&rsquo;)
+var getEntries = require(&lsquo;./getEntries&rsquo;)
+var ExtractTextPlugin = require(&lsquo;extract-text-webpack-plugin&rsquo;);
+var assetsInsert = require(&lsquo;./assetsInsert&rsquo;)</p>
+
+<p>var productionConf = merge(baseConfig, {
+    entry: getEntries(),
+    output: {
+        filename: &lsquo;./[name].[hash].js&rsquo;,
+        path: path.resolve(&lsquo;./public/dist&rsquo;),
+        publicPath: &lsquo;./&rsquo;
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            &lsquo;process.env&rsquo;: {
+                NODE_ENV: &lsquo;&ldquo;production&rdquo;&rsquo;
+            }
+        }),
+        new ExtractTextPlugin(&lsquo;./[name].[hash].css&rsquo;, {
+            allChunks: true
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new assetsInsert()
+    ]
+})</p>
+
+<p>productionConf.module.loaders = [
+             {
+                test: /.js$/,
+                loader: &lsquo;babel&rsquo;,
+                exclude: /node_modules/
+            }, {
+                test: /.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: &lsquo;url?limit=8192&amp;context=client&amp;name=[path][name].[hash:7].[ext]&rsquo;
+            },
+            {
+                test: /.css$/,
+                loader: ExtractTextPlugin.extract(&lsquo;style&rsquo;, &lsquo;css&rsquo;),
+            },
+            {
+                test: /.scss$/,
+                loader: ExtractTextPlugin.extract(&lsquo;style&rsquo;, &lsquo;css!sass&rsquo;)
+            }]</p>
+
+<p>module.exports = productionConf</p>
+
+<p>`
+基本跟开发的差不多，差别在于：</p>
+
+<p>1、使用ExtractTextPlugin 来打包css，所以要干掉原来base的loaders，重新写了一个，在最下面。</p>
+
+<p>2、UglifyJsPlugin 给js压缩代码。其他没有什么好解释的了，一样的。
+`</p>
+
+<h3 id="4-构建命令">4. 构建命令</h3>
+
+<p>require(&lsquo;shelljs/global&rsquo;)
+env.NODE_ENV = &lsquo;production&rsquo;
+var ora = require(&lsquo;ora&rsquo;)
+var webpack = require(&lsquo;webpack&rsquo;)
+var webpackConfig = require(&lsquo;./webpack.production.config&rsquo;)</p>
+
+<p>var spinner = ora(&lsquo;building for production&hellip;&rsquo;)
+spinner.start()</p>
+
+<p>var staticPath = __dirname + &lsquo;/../public/dist/&rsquo;
+rm(&lsquo;-rf&rsquo;, staticPath)
+mkdir(&lsquo;-p&rsquo;, staticPath)</p>
+
+<p>webpack(webpackConfig, function (err, stats) {
+  spinner.stop()
+  if (err) throw err
+  process.stdout.write(stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
+  }) + &lsquo;\n&rsquo;)
+})</p>
+
+<p>`
+写一个build.js，然后在package.json里面添加 script 参数</p>
+
+<p>&ldquo;build&rdquo;: &ldquo;node build.js&rdquo;//这里记得写自己build.js路径
+`</p>
+
+<h3 id="5-甜点-马卡龙-有点腻">5. 甜点（马卡龙） 有点腻</h3>
+
+<p><code>
+上面的配置是可以更改的，例如你在loaders 里面加上
+</code>
+{
+  test: /.vue$/,
+  loader: &lsquo;vue&rsquo;
+}
+`
+就可以变成支持.vue文件的vuejs打包构建，同理，修改下支持jsx，和添加一些reactjs的module，就可以用来跑Reactjs的东西。</p>
+
+<p>还有可以随意更改Css预编译器的类型，用你自己喜欢就行，或者跟我们前面提到的方法，把所有类型都配置上，
+`
+var path = require(&lsquo;path&rsquo;)
+var config = require(&lsquo;../config&rsquo;)
+var ExtractTextPlugin = require(&lsquo;extract-text-webpack-plugin&rsquo;)</p>
+
+<p>exports.assetsPath = function (_path) {
+  return path.posix.join(config.build.assetsSubDirectory, _path)
+}</p>
+
+<p>exports.cssLoaders = function (options) {
+  options = options || {}
+  // generate loader string to be used with extract text plugin
+  function generateLoaders (loaders) {
+    var sourceLoader = loaders.map(function (loader) {
+      var extraParamChar
+      if (/\?/.test(loader)) {
+        loader = loader.replace(/\?/, &lsquo;-loader?&rsquo;)
+        extraParamChar = &lsquo;&amp;&rsquo;
+      } else {
+        loader = loader + &lsquo;-loader&rsquo;
+        extraParamChar = &lsquo;?&rsquo;
+      }
+      return loader + (options.sourceMap ? extraParamChar + &lsquo;sourceMap&rsquo; : &ldquo;)
+    }).join(&lsquo;!&rsquo;)</p>
+
+<pre><code>if (options.extract) {
+  return ExtractTextPlugin.extract('vue-style-loader', sourceLoader)
+} else {
+  return ['vue-style-loader', sourceLoader].join('!')
+}
+</code></pre>
+
+<p>}</p>
+
+<p>// <a href="http://vuejs.github.io/vue-loader/configurations/extract-css.html">http://vuejs.github.io/vue-loader/configurations/extract-css.html</a>
+  return {
+    css: generateLoaders([&lsquo;css&rsquo;]),
+    postcss: generateLoaders([&lsquo;css&rsquo;]),
+    less: generateLoaders([&lsquo;css&rsquo;, &lsquo;less&rsquo;]),
+    sass: generateLoaders([&lsquo;css&rsquo;, &lsquo;sass?indentedSyntax&rsquo;]),
+    scss: generateLoaders([&lsquo;css&rsquo;, &lsquo;sass&rsquo;]),
+    stylus: generateLoaders([&lsquo;css&rsquo;, &lsquo;stylus&rsquo;]),
+    styl: generateLoaders([&lsquo;css&rsquo;, &lsquo;stylus&rsquo;])
+  }
+}</p>
+
+<p>// Generate loaders for standalone style files (outside of .vue)
+exports.styleLoaders = function (options) {
+  var output = []
+  var loaders = exports.cssLoaders(options)
+  for (var extension in loaders) {
+    var loader = loaders[extension]
+    output.push({
+      test: new RegExp(&rsquo;\.&rsquo; + extension + &lsquo;$&rsquo;),
+      loader: loader
+    })
+  }
+  return output
+}</p>
+
+<p><code>
+这就是把所有的css预编译的都加到配置里面了。
+</code></p>
+
+    
+        
+
 <h1 id="tools">Tools</h1>
 
     
@@ -1680,69 +2035,6 @@ clean:
         
     
         
-    
-        
-
-<h2 id="js-development-environment">JS Development Environment</h2>
-
-<p>随着前端和 Node.JS 的发展, 以及页面的APP化, JS 成为开发应用的不错的选择.
-前后通吃, 语法灵活, 发展迅速, 对提高开发效率很有帮助.</p>
-
-<p>JS 开发发展迅速带来的一个问题是工具和库众多, 开发中选择什么工具成了一个问题.
-我从两年前真正开始写JS开始尝试了一些工具和库, 试过之后才知道什么更适合自己.</p>
-
-<h3 id="编辑器">编辑器</h3>
-
-<p>单就文本编辑器而言, 当然还是首推 Emacs 和 Vim. 除这两者之外, 还有许多不错和编辑器和IDE.</p>
-
-<ul>
-<li>Sublime 比较灵活, 有插件, 可配置. 上手容易, 但要用上各种插件有点繁.</li>
-<li>Atom 比较适合前端技术栈, github 出品, 应该不错. 没真正用过.</li>
-<li>Brackets 使用时感觉很方便, web 预览功能很不错. 当时版本较早, 有一些bug, 现在应该更好用了.</li>
-<li>WebStorm 完整的 IDE 的样子, 对 JS 开发非常不错, 前端, Node.JS, git 都支持, 也有 emacs 模式. 用习惯之后对生产效率应该会有提升.</li>
-</ul>
-
-<h3 id="打包">打包</h3>
-
-<p>打包包括了开发上线所需的预编译, 压缩, 转换, 优化, 构建任务.</p>
-
-<p>现在使用的是 Webpack. 既然 Webpack 有丰富的loader, 方便的 API, 良好的生态环境, 为什么不用它呢?</p>
-
-<p>由于接触JS工程比较晚, 有 Webpack 可用, 对早期的 Grunt 和后来的 Gulp 并不了解.
-大家似乎是觉得 Grunt 配置麻烦, 效率不高, 于是转向 Gulp.
-还有就是使用 NPM 的构建方式, 我不怎么会用, 感觉和上面三种打包工具不属一类工具.
-在自己的工程中尝试使用过 Grunt 和 Gulp, 由于工程较小, 使用起来并没有感觉方便.
-在压缩js, 分发文件方面, 比自己写 Python 脚本更复杂.</p>
-
-<p>Grunt 要完成配置之后, 在日常开发中, 通过一个命令就能自动完成文件合并压缩, 上线构建, 在线重载(live-reload).
-在项目变得复杂之后, 仅靠配置难以满足需求, 只有增加插件配置项. 而越来越多的配置项使得Grunt的配置变得过于麻烦.</p>
-
-<p>Gulp 则是提供类 Linux 的文件流操作, 以编程的方式组建任务, 来解决越来越多的配置项的问题.</p>
-
-<hr />
-
-<h3 id="webpack-vue-心得">webpack + vue 心得</h3>
-
-<p>[ref: wechat 医小生与程序猿 (doctor_programmer)]</p>
-
-<ol>
-<li><p><strong>要单页面还是多页面。</strong>  我们的项目比较大，目录又多又深，如果用配合vue-router做成整体的单页面应用，必然会因多级嵌套路由而造成各种困扰。所以最终决定一个功能模块一个页面，各模块自己做成SPA。这个方案也为后面进行多入口打包带来了麻烦。</p></li>
-
-<li><p><strong>公共框架如何处理。</strong>  所谓公共框架就是像vue、jquery、bootstrap这的第三方框架。 它们基本不会改动，所以肯定是要单独打成一个包的，充分利用缓存。另外一个问题就是，这些框架的代码放哪里好，有人用bower管理，有人用npm管理，或者是像我们之前那样在项目中放一个lib目录，下载好框架代码后就放进去不动了。不过现在业界普遍都推commonjs规范了，所以用npm来管理是个趋势。</p></li>
-
-<li><p><strong>项目的公用组件如何打包。</strong>  既然是用vue，那肯定会写很多公共的组件了，这些组件肯定不能和第三方库打包到一起，也不要和业务代码打包在一起，因为业务代码总改动，而公共组件相对改动也比较少。最好是把所有的组件打成一个包。然而webpack的设计思想并不是这样，它是完全按照模块的依赖树来分析，根据依赖进行打包。我们的组件之间如果没有依赖，是没法打到一起的。</p></li>
-
-<li><p><strong>CommonsChunkPlugin的硬伤。</strong>  关于公用组件的处理，其实可以用CommonsChunkPlugin这个插件，它能自动分析出公共模块并打成一个包。但是这个插件有个硬伤，如果我写了一个名为popbox的组件，本意是想给项目公用，但是目前只有一个模块用到了它，那么插件并不能知道它是公用插件，而会把它和业务代码打包到一起。倘若将来有第二个模块用到了popbox，就又会把它打进公共包里，这显然是很弱智的行为。</p></li>
-
-<li><p><strong>entry只干入口的事。</strong>  我一开始想，把公共组件放entry中打包一下行不行，像这样配置：components: [&lsquo;loading&rsquo;, &lsquo;menu&rsquo;, &lsquo;box&rsquo;]。结果证明是不能的，文件虽然能打包出来，但是没法用，就是你<script>标签把文件加到页面也不行，别的模块用require无法引用到。原因就是entry打包出的文件作为入口文件，必须包含直接运行的代码。</p></li>
-
-<li><p><strong>webpack-stream是个鸡肋。</strong>  一开始我被entry和output的各种配置整的摸不着头脑，因为项目目录多，想要更精细的控制，却发现output总是无法按我的需求输出。后来我看到了有webpack-stream这个东西，而且是官方推荐的。简单来讲，它就是实现了文件流接口，从而能与gulp配合工作，我一看这是个好东西啊。研究了一番，发现也没什么功能，就是能用gulp.src代替entry，用gulp.dest代替output，对于多入口打包，就完全没什么用了，还得在webpack中配置，所以简直就是个鸡肋。直接弃用。</p></li>
-
-<li><p><strong>这么多require用哪个。</strong>  一开始用webpack构建应用的时候，每当写require的时候我是懵逼的，有commonjs风格的require用法、AMD风格的require加回调用法，以及webpack提供的require.ensure用来打包异步加载的模块。另外还有ES6的import，既然都用vue了，我们肯定得用ES6嘛。这么多引入模块的方法，你得保持头脑清醒了，他们都有什么区别，什么场景下用哪个。</p></li>
-
-<li><p><strong>dist目录不是给人看的。</strong>  鉴于之前用gulp的习惯，打包后的目录也是有很清晰的结构，而且打包前我们src目录下的代码也是直接可运行的。但是有了webpack之后，首先src下的代码未经打包不能在开发环境运行，其次output选项只能指定一个输出目录，无法再按你的想法再进行组织。唯一有点用的方法是在entry中，把入口文件名字写成这样foo/bar/baz。勉强能在输出目录中新建出文件夹。但是总体来看，dist目录还是一团糟，尤其是异步的chunk文件，只能是id+hash这样的名字。所以我也明白了，要用webpack就别打算去看dist目录了，只能用sourcemap在浏览器看。</p></li>
-</ol>
-
     
         
 
