@@ -12,17 +12,6 @@
     
     
     <item>
-      <title>viEmacs Listing Page</title>
-      <link>./</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>./</guid>
-      <description>Introduction Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-This example API documentation page was created with DocuAPI, a multilingual documentation theme for the static site generator Hugo.</description>
-    </item>
-    
-    <item>
       <title>Algorithm</title>
       <link>./algorithm/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -118,6 +107,38 @@ To route methods that translate to invalid JavaScript variable names, use the br
     
     <item>
       <title>JS</title>
+      <link>./js/nodejs-mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/nodejs-mysql/</guid>
+      <description>MySQL in NodeJS 1. 建立数据库连接 createConnection(Object) 该方法接受一个对象作为参数，该对象有四个常用的属性host，user，password，database。与php中链接数据库的参数相同。属性列表如下：
+host: 连接数据库所在的主机名. (默认: localhost) port: 连接端口. (默认: 3306) localAddress: 用于TCP连接的IP地址. (可选) socketPath: 链接到unix域的路径。在使用host和port时该参数会被忽略. user: MySQL用户的用户名. password: MySQL用户的密码. database: 链接到的数据库名称 (可选). charset: 连接的字符集. (默认: &amp;#39;UTF8_GENERAL_CI&amp;#39;.设置该值要使用大写!) timezone: 储存本地时间的时区. (默认: &amp;#39;local&amp;#39;) stringifyObjects: 是否序列化对象. See issue #501. (默认: &amp;#39;false&amp;#39;) insecureAuth: 是否允许旧的身份验证方法连接到数据库实例. (默认: false) typeCast: 确定是否讲column值转换为本地JavaScript类型列值. (默认: true) queryFormat: 自定义的查询语句格式化函数. supportBigNumbers: 数据库处理大数字(长整型和含小数),时应该启用 (默认: false). bigNumberStrings: 启用 supportBigNumbers和bigNumberStrings 并强制这些数字以字符串的方式返回(默认: false). dateStrings: 强制日期类型(TIMESTAMP, DATETIME, DATE)以字符串返回，而不是一javascript Date对象返回. (默认: false) debug: 是否开启调试.</description>
+    </item>
+    
+    <item>
+      <title>JS</title>
+      <link>./js/oop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/oop/</guid>
+      <description>Object-Oriented Programming of Javascript notes of 1 2 3
+JS 的对象 JS 本身是基于对象的语言，在 JS 中所操作的基本都是对象。但在 ES2015 之前它又没有 class 的类。
+ 对象实例  let record = { name: &amp;#39;&amp;#39;, nation: &amp;#39;&amp;#39; };  Schema 规格
+let record1 = { name: &amp;#39;Alpha&amp;#39;, nation: &amp;#39;China&amp;#39; }; let record2 = { name: &amp;#39;Beta, nation: &amp;#39;Denmark&amp;#39; };  给对象赋予属性和方法</description>
+    </item>
+    
+    <item>
+      <title>JS</title>
+      <link>./js/performance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./js/performance/</guid>
+      <description>Practice of JavaScript Performance Since JavaScript becomes a fullstack programming language, in certain cases the performance of JS is critical. Here are some practice of JS, with some understanding of JS implementation.
+Data Store How a variable is create will effect its performance. - Use {} instead of new Object, use [] instead of new Array, use plain string instead of an object. - Use local temporary variable to store variable deep upon the data-chain, and values require many calculation.</description>
+    </item>
+    
+    <item>
+      <title>JS</title>
       <link>./js/webpack/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -198,16 +219,6 @@ def foo(): pass  </description>
       
       <guid>./about/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>./js/performance/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>./js/performance/</guid>
-      <description>Practice of JavaScript Performance Since JavaScript becomes a fullstack programming language, in certain cases the performance of JS is critical. Here are some practice of JS, with some understanding of JS implementation.
-Data Store How a variable is create will effect its performance. - Use {} instead of new Object, use [] instead of new Array, use plain string instead of an object. - Use local temporary variable to store variable deep upon the data-chain, and values require many calculation.</description>
     </item>
     
   </channel>
