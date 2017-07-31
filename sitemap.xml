@@ -59,6 +59,22 @@
   </url>
   
   <url>
+    <loc>./norm/access/</loc>
+  </url>
+  
+  <url>
+    <loc>./norm/code-review/</loc>
+  </url>
+  
+  <url>
+    <loc>./sql/access/</loc>
+  </url>
+  
+  <url>
+    <loc>./sql/variable/</loc>
+  </url>
+  
+  <url>
     <loc>./tools/access/</loc>
   </url>
   
@@ -84,6 +100,14 @@
   <url>
     <loc>./about/</loc>
     <lastmod>2017-07-20T09:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>./norm/code_review/</loc>
+  </url>
+  
+  <url>
+    <loc>./norm/plan/</loc>
   </url>
   
   <url>
@@ -113,8 +137,18 @@
   </url>
   
   <url>
+    <loc>./norm/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>./python/</loc>
     <lastmod>2017-07-22T11:51:17+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>./sql/</loc>
     <priority>0</priority>
   </url>
   

@@ -158,6 +158,56 @@ Data Store How a variable is create will effect its performance. - Use {} instea
     </item>
     
     <item>
+      <title>Norm</title>
+      <link>./norm/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./norm/access/</guid>
+      <description> Norm </description>
+    </item>
+    
+    <item>
+      <title>Norm</title>
+      <link>./norm/code-review/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./norm/code-review/</guid>
+      <description>Code Review 为什么做 Code Review 做 Code review 是为了改进代码质量. 通过对代码, 测试过程和注释进行检查, 来确认方案设计和代码实现.
+Code review 的主要目的:
+ 保证代码质量   程序逻辑 需求和设计的实现 查找和排除系统缺陷 可读性 可维护性
+ 保证项目组人员的良好沟通
+ 项目或产品的代码更容易维护
+   提高参与者开发水平 传递作者的意图和想法，使其他人可以更加熟悉代码，利于维护代码和改进代码 评审过程使大家更多的理解系统，重构思路， 确定作者的设计和实现清晰，简单 帮助初级开发人员学习高级开发人员的经验，达到知识共享, 相互学习，提高开发者水平  次要目的: - 查找程序的bug - 保证代码风格和编码标准 - 编码风格 - 避免开发人员犯一些很常见，很普通的错误 - 在项目早期就能够发现代码中的BUG
+消除 Bug 主要靠测试. 由单元测试，功能测试，性能测试，回归测试来消除Bug。 单元测试为主。单元测试最接近bug，bug没有扩散的地方。 在 code review 之前，要有单元测试和单元测试报告，
+代码风格和编码标准是确定的, 是靠个人可以做到的, 所以在代码提交时就应该是符合规范的。 代码规范，有作者自己和一些检查代码规范的工具。
+规范性 - 注释格式 - 命名规范
+ 异常处理 日志处理 代码组织结构</description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>./sql/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./sql/access/</guid>
+      <description> SQL </description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>./sql/variable/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./sql/variable/</guid>
+      <description>Declare a Variable in MySQL (ref)
+There are mainly three types of variables in MySQL:
+User-defined variables (prefixed with @):
+You can access any user-defined variable without declaring it or initializing it. If you refer to a variable that has not been initialized, it has a value of NULL and a type of string.
+SELECT @var_any_var_name You can initialize a variable using SET or SELECT statement:
+SET @start = 1, @finish = 10;</description>
+    </item>
+    
+    <item>
       <title>Tools</title>
       <link>./tools/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -219,6 +269,42 @@ def foo(): pass  </description>
       
       <guid>./about/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./norm/code_review/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./norm/code_review/</guid>
+      <description>review 记录：作者记录，表格记录，checkout -b review， checkout -b review_by_Foo, git pull &amp;amp;&amp;amp; checkout -b review_by_Foo
+http://blog.csdn.net/haoel/article/details/4469526
+http://blog.csdn.net/haoel/article/details/4469462
+http://www.cnblogs.com/lhb25/p/15-best-code-review-tools-for-developers.html
+Code Review中的几个提示
+Code Review应该是软件工程最最有价值的一个活动，之前，本站发表过《简单实用的Code Review工具》，那些工具主要是用来帮助更有效地进行这个活动，这里的这篇文章，我们主要想和大家分享一下Code Review代码审查的一些心得。
+首先，我们先来看看Code Reivew的用处：
+Code reviews 中，可以通过大家的建议增进代码的质量。 Code reviews 是一个传递知识的手段，可以让其它并不熟悉代码的人知道作者的意图和想法，从而可以在以后轻松维护代码。 Code reviews 也鼓励程序员们相互学习对方的长处和优点。 Code reviews 也可以被用来确认自己的设计和实现是一个清楚和简单的。 你也许注意到了在上面的Code Reivew中的诸多用处中，我们没有提到可以帮助找到程序的bug和保证代码风格和编码标准。这是因为我们认为：
+Code reviews 不应该承担发现代码错误的职责。Code Review主要是审核代码的质量，如可读性，可维护性，以及程序的逻辑和对需求和设计的实现。代码中的bug和错误应该由单元测试，功能测试，性能测试，回归测试来保证的（其中主要是单元测试，因为那是最接近Bug，也是Bug没有扩散的地方）
+所以，在今天，请不要把上面的那两件事分散了Code Review的注意力，取而代之的是，对于Bug，程序的作者要在Review前提交自己的单元测试报告（如：XUnit的测试结果），对于代码规范，这是程序作者自己需要保证的，而且，有一些工具是可以帮你来检查代码规范的。
+不是说不能在Code Review中报告一个程序的bug或是一个代码规范的问题。只是说那并不是Code Review的意图。
+1.- 经常进行Code Review 以前经历过几个相当痛苦的Code Review，那几次Code Review都是在程序完成的时候进行的，当你面对那近万行的代码，以前N我掺和在一起的功能，你会发现，整个Code Review变得非常地艰难，用不了一会儿，你就会发现大家都在拼命地打着哈欠，但还是要坚持，有时候，这样的Review会持续3个小时以上，相当的夸张。而且，会议上会出现相当多的问题和争论，因为，这就好像，人家都把整个房子盖好了，大家Review时这挑一点那挑一点，有时候触动地基或是承重墙体，需要大动手术，让人返工，这当然会让盖房的人一下就跳起来极力地维护自己的代码，最后还伤了团队成员的感情。
+所以，千万不要等大厦都盖好了再去Reivew，而且当有了地基，有了框架，有了房顶，有了门窗，有了装修，的各个时候循序渐进地进行Review，这样反而会更有效率，也更有帮助。
+下面是一些观点，千万要铭记：
+要Review的代码越多，那么要重构，重写的代码就会越多。而越不被程序作者接受的建议也会越多，唾沫口水战也会越多。 程序员代码写得时候越长，程序员就会在代码中加入越来越多的个人的东西。 程序员最大的问题就是“自负”，无论什么时候，什么情况下，有太多的机会会让这种“自负”澎涨开来，并开始影响团队影响整个项目，以至于听不见别人的建议，从而让Code Review变成了口水战。 越接近软件发布的最终期限，代码也就不能改得太多。 我个人的习惯，并且也是对团队成员的要求是——先Review设计实现思路，然后Review设计模式，接着Review成形的骨干代码，最后Review完成的代码，如果程序复杂的话，需要拆成几个单元或模块分别Review。当然，最佳的practice是，每次Review的代码应该在1000行以内，时间不能超过一部电影的时间——1.5小时（因为据说那个一个正常人的膀胱可以容纳尿液的最长限度）
+当然，在敏捷开发中，他们不需要Code Reivew，其实，敏捷开发中使用更为极端的“结对编程”（Pair-Programming）的方法 —— 一种时时刻刻都在进行Code Review的方法，个人感觉在实际过程中，这种方法有点过了。另外，大家可以看看本站的另一篇文章《结对编程的利与弊》来了解一下这种方法的问题。
+3.- 尽可能的让不同的人Reivew你的代码 这是一个好主意，如果可能的话，不要总是只找一个人来Review你的代码，不同的人有不同的思考方式，有不同的见解，所以，不同的人可以全面的从各个方面评论你的代码，有的从实现的角度，有的从需求的角度，有的从用户使用的角度，有的从算法的角度，有的从性能效率的角度，有的从易读的角度，有的从扩展性的角度……，啊，好多啊，还让不让人活了。不管怎么说，多找一些不同的人会对你很有好处。当然，不要太多了，人多嘴杂反而适得其反，基本上来说，不要超过3个人，这是因为，这是一个可以围在一起讨论的最大人员尺寸。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./norm/plan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./norm/plan/</guid>
+      <description>new T1 算法 Schedule 48 所有时间估计实施时长乘系数 0.5~3
+程序 apps 23.5 + 3*?  bills 4.5  list 1&amp;frasl;4 get 1&amp;frasl;4 入库 1 出库 1 指定单据入库退货manual 1 指定单据出库退货manual 1  stocks 11 + ? + ? + ?
+ app.stocks 3 + ?  入库 1&amp;frasl;4 出库 1&amp;frasl;4 list 1&amp;frasl;8 get 1&amp;frasl;8 指定单据入库退货manual 1 指定单据出库退货manual 5&amp;frasl;4 修改 ？？  api.settlement 3 + ?  入库 1&amp;frasl;4 出库 1&amp;frasl;4 list 1&amp;frasl;8 get 1&amp;frasl;8 指定单据入库退货manual 1 指定单据出库退货manual 5&amp;frasl;4 修改 ？？  关联表 1  出库关联 1&amp;frasl;8 关联修改 1&amp;frasl;8 关联调用 3&amp;frasl;4  app.</description>
     </item>
     
   </channel>
