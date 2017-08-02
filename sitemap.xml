@@ -23,6 +23,10 @@
   </url>
   
   <url>
+    <loc>./go/access/</loc>
+  </url>
+  
+  <url>
     <loc>./js/access/</loc>
   </url>
   
@@ -122,6 +126,11 @@
   
   <url>
     <loc>./editor/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>./go/</loc>
     <priority>0</priority>
   </url>
   
