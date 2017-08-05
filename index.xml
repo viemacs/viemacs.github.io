@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>AI</title>
+      <link>./access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./access/</guid>
+      <description> An Introduction We trust you have received the usual lecture from the local System Administrator. It usually boils down to these three things:
+ 1) Respect the privacy of others. 2) Think before you type. 3) With great power comes great responsibility.  </description>
+    </item>
+    
+    <item>
       <title>Algorithm</title>
       <link>./algorithm/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -27,6 +37,40 @@
       
       <guid>./algorithm/huffman/</guid>
       <description>Huffman Encoding class Node(object): def __init__(self, symbol = &amp;#39;&amp;#39;, weight = 0, left = None, right = None): self.symbol, self.weight, self.left, self.right = symbol, weight, left, right if (left and right): self.weight = left.weight + right.weight def result(self, code = &amp;#39;&amp;#39;): r = [] self.symbol and r.append((self.symbol, self.weight, code)) self.left and r.extend(self.left.result(code + &amp;#39;0&amp;#39;)) self.right and r.extend(self.right.result(code + &amp;#39;1&amp;#39;)) return r def genHuffman(char, freq): nodeList = [] for i in range(len(char)): nodeList.</description>
+    </item>
+    
+    <item>
+      <title>C</title>
+      <link>./c/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./c/access/</guid>
+      <description> C </description>
+    </item>
+    
+    <item>
+      <title>C</title>
+      <link>./c/memory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./c/memory/</guid>
+      <description>Memory 内存分配方式中的 栈、堆、自由存储区、全局与静态存储区、常量存储区  栈
+栈是由编译器管理的变量存储区，在需要时分配，在不需要时自动释放。用户栈位于用户进程地址空间的顶部，在执行期间可以动态地扩展和收缩。栈中的变量有局部变量、函数参数，编译器也会用栈来实现函数调用。
+ 堆
+堆是由用户程序主动管理的内存块，编译器不做管理。堆上的内存用 new 分配，用 delete 释放。没有释放的内存在用户程序结束后由操作系统回收。堆可以*动态地扩展和收缩*。
+ 自由存储区
+自由存储区和堆相似。自由存储区的内存用 malloc 分配，用 free 释放。
+ 全局与静态存储区
+全局变量和静态变量的内存存储区。在 C++ 中为一块内存区。在 C 中，静态变量和初始化的全局变量在一块内存区，未初始化的全局变量在相邻的内存区。可通过 void* 来操作未初始化变量的存储区。全局和静态变量都在程序结束时由系统进行释放。
+ 常量存储区
+常量存储，不允许修改其中的变量。
+  堆栈的区别 堆和栈的区别是大家常说起的一个点 在 BBS 上，堆与栈的区分问题，似乎是一个永恒的话题，由此可见，初学者对此往往是混淆不清的，所以我决定拿他第一个开刀。
+首先，我们举一个例子：
+void f() { int* p=newint[5]; } 这条短短的一句话就包含了堆与栈，看到 new，我们首先就应该想到，我们分配了一块堆内存，那么指针 p 呢？他分配的是一块栈内存，所以这句话的意思就是：在栈内存中存放了一个指向一块堆内存的指针 p。在程序会先确定在堆中分配内存的大小，然后调用 operator new 分配内存，然后返回这块内存的首地址，放入栈中，他在 VC6 下的汇编代码如下：
+复制代码 00401028push 14h
+0040102Acall operator new (00401060)
+0040102Fadd esp,4
+00401032mov dword ptr [ebp-8],eax</description>
     </item>
     
     <item>
