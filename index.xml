@@ -54,25 +54,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>./c/memory/</guid>
-      <description>Memory 内存分配方式中的 栈、堆、自由存储区、全局与静态存储区、常量存储区  栈
-栈是由编译器管理的变量存储区，在需要时分配，在不需要时自动释放。用户栈位于用户进程地址空间的顶部，在执行期间可以动态地扩展和收缩。栈中的变量有局部变量、函数参数，编译器也会用栈来实现函数调用。
- 堆
-堆是由用户程序主动管理的内存块，编译器不做管理。堆上的内存用 new 分配，用 delete 释放。没有释放的内存在用户程序结束后由操作系统回收。堆可以*动态地扩展和收缩*。
- 自由存储区
-自由存储区和堆相似。自由存储区的内存用 malloc 分配，用 free 释放。
- 全局与静态存储区
-全局变量和静态变量的内存存储区。在 C++ 中为一块内存区。在 C 中，静态变量和初始化的全局变量在一块内存区，未初始化的全局变量在相邻的内存区。可通过 void* 来操作未初始化变量的存储区。全局和静态变量都在程序结束时由系统进行释放。
- 常量存储区
-常量存储，不允许修改其中的变量。
-  堆栈的区别 堆和栈的区别是大家常说起的一个问题。
-#include &amp;lt;stdlib.h&amp;gt; int main() { int* a = (int*) malloc(4); free(a); return 0; }  指针 a 在栈上分配了一段内存，malloc 在堆上分配了一段4个整型大小的内存，然后把这段内存的首地址返回给指针 a。
-堆和栈的区别主要有5点。（中文中“堆栈”指栈。）
- 管理方式
-栈由编译器自动管理；堆由用户程序主动管理，显示进行分配和释放。
- 空间大小
-栈一般有一定的空间大小，而且默认的空间大小较小，例如1M；而堆在32位系统下的地址空间就可以达到4G。
- 碎片
-栈是 FILO 队列，永远不会从中间 pop 内存块。而堆在大量的 malloc/free, new/delete 内存空间会产生许多的不连续，生成内存碎片。</description>
+      <description>Memory #include &amp;lt;string.h&amp;gt; int g_a = 0; // global, initialized int* g_p; // global, uninitialized int main() { int a; // stack char s[] = &amp;quot;ab&amp;quot;; // s: stack, &amp;quot;ab&amp;quot; constant char *p1; // static char *p2 = &amp;quot;12&amp;quot;; // p2: stack, &amp;quot;12&amp;quot; constant static int b = 0;// static g_p = (char *)malloc(8); // heap p1 = (char *)malloc(8); // heap strcpy(g_p, &amp;quot;12&amp;quot;); // &amp;quot;12&amp;quot; constant // the memory might be optimized by compiler and use the same memory as p2 return 0; }  内存分配方式中的 栈、堆-自由存储区、全局与静态存储区、常量存储区  栈</description>
     </item>
     
     <item>

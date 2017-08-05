@@ -164,18 +164,32 @@ Administrator. It usually boils down to these three things:</p>
         
 
 <h2 id="memory">Memory</h2>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span></span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="n">g_a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// global, initialized</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">g_p</span><span class="p">;</span>    <span class="c1">// global, uninitialized</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>           <span class="c1">// stack</span>
+    <span class="kt">char</span> <span class="n">s</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;ab&quot;</span><span class="p">;</span> <span class="c1">// s: stack, &quot;ab&quot; constant</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>        <span class="c1">// static</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="s">&quot;12&quot;</span><span class="p">;</span> <span class="c1">// p2: stack, &quot;12&quot; constant</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">// static</span>
+    <span class="n">g_p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span> <span class="c1">// heap</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>  <span class="c1">// heap</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">g_p</span><span class="p">,</span> <span class="s">&quot;12&quot;</span><span class="p">);</span> <span class="c1">// &quot;12&quot; constant</span>
+                       <span class="c1">// the memory might be optimized by compiler and use the same memory as p2</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 
-<h3 id="内存分配方式中的-栈-堆-自由存储区-全局与静态存储区-常量存储区">内存分配方式中的 栈、堆、自由存储区、全局与静态存储区、常量存储区</h3>
+<h3 id="内存分配方式中的-栈-堆-自由存储区-全局与静态存储区-常量存储区">内存分配方式中的 栈、堆-自由存储区、全局与静态存储区、常量存储区</h3>
 
 <ul>
 <li><p>栈<br />
 栈是由编译器管理的变量存储区，在需要时分配，在不需要时自动释放。用户栈位于用户进程地址空间的顶部，在执行期间可以<strong>动态地扩展和收缩</strong>。栈中的变量有局部变量、函数参数，编译器也会用栈来实现函数调用。</p></li>
 
 <li><p>堆<br />
-堆是由用户程序主动管理的内存块，编译器不做管理。堆上的内存用 new 分配，用 delete 释放。没有释放的内存在用户程序结束后由操作系统回收。堆可以*动态地扩展和收缩*。</p></li>
-
-<li><p>自由存储区<br />
-自由存储区和堆相似。自由存储区的内存用 malloc 分配，用 free 释放。</p></li>
+堆是由用户程序主动管理的内存块，编译器不做管理。堆内存用 malloc/calloc/realloc 分配，用 free 释放；或用 new 分配，用 delete 释放。没有释放的内存在用户程序结束后由操作系统回收。堆可以*动态地扩展和收缩*。<br />
+在 Linux 上，malloc 和 new 分配的内存都在堆上，但两种分配所执行的操作有所不同。</p></li>
 
 <li><p>全局与静态存储区<br />
 全局变量和静态变量的内存存储区。在 C++ 中为一块内存区。在 C 中，静态变量和初始化的全局变量在一块内存区，未初始化的全局变量在相邻的内存区。可通过 void* 来操作未初始化变量的存储区。全局和静态变量都在程序结束时由系统进行释放。</p></li>
