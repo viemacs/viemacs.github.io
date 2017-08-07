@@ -83,6 +83,10 @@
   </url>
   
   <url>
+    <loc>./network/proxy/</loc>
+  </url>
+  
+  <url>
     <loc>./norm/access/</loc>
   </url>
   
