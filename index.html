@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.25.1" />
+	<meta name="generator" content="Hugo 0.26" />
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -1745,18 +1745,75 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
 
 <p>JS 本身是基于对象的语言，在 JS 中所操作的基本都是对象。但在 ES2015 之前它又没有 class 的类。</p>
 
+<p>如果要从原型对象生成实例对象，要把属性和方法封装到对象里。properties and methods</p>
+
 <ul>
 <li>对象实例</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">record</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s1">&#39;&#39;</span> <span class="p">};</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">record</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s2">&quot;&quot;</span> <span class="p">};</span>
 </code></pre></div>
 
 <p>Schema 规格</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Alpha&#39;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s1">&#39;China&#39;</span> <span class="p">};</span>
-<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Beta, nation: &#39;</span><span class="nx">Denmark</span><span class="err">&#39;</span> <span class="p">};</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s2">&quot;China&quot;</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Beta, nation: &quot;</span><span class="nx">Denmark</span><span class="err">&quot;</span> <span class="p">};</span>
 </code></pre></div>
 
 <p>给对象赋予属性和方法</p>
+
+<p>这可以看作最简单的封装，但原型和实例间并不存在内在联系。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+        <span class="nx">nation</span><span class="o">:</span> <span class="nx">nation</span><span class="p">,</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>用函数调用返回对象方式可以在原型和实例间建立一定联系，但两个实例间没有内在联系。</p>
+
+<ul>
+<li>构造函数模式</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">nation</span> <span class="o">=</span> <span class="nx">nation</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Javascript 提供了 Constructor 构造函数模式。构造函数是使用了 this 变量的普通函数，在使用 new 运算符生成实例时，this 会绑定到对象实例上，使 <code>foo.constructor == Foo</code>。JS 中的 instanceof 运算符可以验证原型与实例对象间的关系，<code>(foo instanceof Foo) == true</code>。</p>
+
+<ul>
+<li>原型模式 prototype</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">nation</span> <span class="o">=</span> <span class="nx">nation</span><span class="p">;</span> <span class="p">}</span>
+<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="s2">&quot;human&quot;</span><span class="p">;</span>
+<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">);</span> <span class="c1">// with `species` and `greet()`</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>构造函数模式的问题在于原型中的属性和方法在每个实例中都要创建。其中重复的内容就额外地占用的资源。JS 中每个构造函数都有 prototype 属性，指向另一个对象；所指向对象的属性和方法都被构造函数继承。</p>
+
+<p>这样，不变的属性和方法可以直接定义在 prototype 对象上。在例子中，所有实例的 species 和 greet() 方法都指向相同的地址，即 prototype 对象。</p>
+
+<p>JS 中有一些对应 prototype 模式的方法</p>
+
+<ul>
+<li><p><code>isPrototypeOf()</code> 判断 prototype 对象和实例间的关系<br />
+<code>Record.prototype.isPrototypeOf(record1)</code></p></li>
+
+<li><p><code>hasOwnProperty()</code> 由实例判断一个属性是本地的还是继承的<br />
+<code>record1.hasOwnProperty(&quot;name&quot;) == true</code><br />
+<code>record1.hasOwnProperty(&quot;species&quot;) == false</code></p></li>
+
+<li><p><code>in</code> 可以遍历一个对象的所有属性，或一个实例是否含有某个属性<br />
+<code>for (let prop in record) console.log(prop);</code><br />
+<code>&quot;name&quot; in record1 == true</code></p></li>
+</ul>
 
     
         

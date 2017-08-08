@@ -202,8 +202,11 @@ host: 连接数据库所在的主机名. (默认: localhost) port: 连接端口.
       <guid>./js/oop/</guid>
       <description>Object-Oriented Programming of Javascript notes of 1 2 3
 JS 的对象 JS 本身是基于对象的语言，在 JS 中所操作的基本都是对象。但在 ES2015 之前它又没有 class 的类。
- 对象实例  let record = { name: &amp;#39;&amp;#39;, nation: &amp;#39;&amp;#39; };  Schema 规格
-let record1 = { name: &amp;#39;Alpha&amp;#39;, nation: &amp;#39;China&amp;#39; }; let record2 = { name: &amp;#39;Beta, nation: &amp;#39;Denmark&amp;#39; };  给对象赋予属性和方法</description>
+如果要从原型对象生成实例对象，要把属性和方法封装到对象里。properties and methods
+ 对象实例  let record = { name: &amp;quot;&amp;quot;, nation: &amp;quot;&amp;quot; };  Schema 规格
+let record1 = { name: &amp;quot;Alpha&amp;quot;, nation: &amp;quot;China&amp;quot; }; let record2 = { name: &amp;quot;Beta, nation: &amp;quot;Denmark&amp;quot; };  给对象赋予属性和方法
+这可以看作最简单的封装，但原型和实例间并不存在内在联系。
+function Record(name, nation) { return { name: name, nation: nation, }; } let record1 = Record(&amp;quot;Alpha&amp;quot;, &amp;quot;China&amp;quot;); let record2 = Record(&amp;quot;Beta&amp;quot;, &amp;quot;Denmark&amp;quot;);  用函数调用返回对象方式可以在原型和实例间建立一定联系，但两个实例间没有内在联系。</description>
     </item>
     
     <item>
