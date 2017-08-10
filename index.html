@@ -1815,6 +1815,59 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
 <code>&quot;name&quot; in record1 == true</code></p></li>
 </ul>
 
+<h3 id="继承对象">继承对象</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Record&quot;</span> <span class="p">}</span>
+<span class="kd">function</span> <span class="nx">Personnel</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">dept</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">dept</span> <span class="o">=</span> <span class="nx">dept</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>对象间继承的方法。</p>
+
+<ul>
+<li><p>绑定构造函数<br />
+使用 apply / call 将父对象的构造函数绑定到子对象上。子对象中需要显式地加入绑定语句。<br />
+<code>function Personnel(name, dept) { ...; Record.apply(this, arguments); }</code></p></li>
+
+<li><p>prototype<br />
+将子类的 prototype 指向父类的一个实例，使所有子类实例继承父类。<br />
+<code>Personnel.prototype = new Record();</code><br />
+<code>Personnel.prototype.constructor = Personnel;</code><br />
+首先是将 Personnel.prototype 替换为指向 Record实例。这时 Personnel.prototype.constructor 指向了 Record 的构造函数，即 <code>Personnel.prototype.constructor == Record</code>，由 Personnel 创建的实例也是如此。所以要将 Personnel.prototype 重新指向 Personnel 的构造函数。</p></li>
+
+<li><p>继承 prototype<br />
+JS 的函数对象可以将不变属性放在 prototype 中，对于只使用不变量的子类，可以直接继承父类的 prototype。<br />
+<code>function Record() {}</code><br />
+<code>Record.prototype.title = &quot;Record&quot;;</code><br />
+<code>Personnel.prototype = Record.prototype;</code><br />
+<code>Personnel.prototype.constructor = Personnel;</code><br />
+这种方法不需要创建父类的实例，效率更高一些。<br />
+直接继承 prototype 有一个问题，子类和父类的 prototype 指向了同一个对象，对子类 prototype 的修改会影响父类的 prototype。<br />
+<code>Record.prototype.constructor == Personnel;</code></p></li>
+
+<li><p>via 空对象<br />
+利用空对象占用内存空间较小这点，通过空对象实例完成继承。
+<code>let F = function() {};</code><br />
+<code>F.prototype = Record.prototype;</code><br />
+<code>Personnel.prototype = new F();</code><br />
+<code>Personnel.prototype.constructor = Personnel;</code></p></li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// YUI extend function</span>
+<span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+    <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+    <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+    <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Child</span><span class="p">;</span>
+    <span class="nx">Child</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">extend</span><span class="p">(</span><span class="nx">Personnel</span><span class="p">,</span> <span class="nx">Record</span><span class="p">);</span>
+</code></pre></div>
+
+<p>可以对这个方式进行封装。如 YUI 库实现继承的方法。</p>
+
+<ul>
+<li>copy<br />
+就是将所有父类的属性和方法</li>
+</ul>
+
     
         
 
