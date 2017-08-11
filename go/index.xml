@@ -11,7 +11,7 @@
     
     
     <item>
-      <title>GO</title>
+      <title>Golang</title>
       <link>./go/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -24,6 +24,18 @@ Go 中不支持参数默认值，函数重载。C 也不支持，是 C++ 支持�
 参数默认值其实是一种隐式表达。调用者仅看名字，不去查看默认参数时，有时会遇到参数默认值导致问题，给调试带来不少麻烦。
 一个表达的意义应该是唯一的，没有二义性。凡是可能导致二义性的行为都应是禁止或尽量避免的。比如函数默认参数，比如类的默认拷贝构造函数。还有一个书写方便但让项目更难调试的功能：自动类型转换。
 进一步，一种表达的写法也应尽可能是唯一的。在 Go 语言的写法中，就没有单行 if 语句要不要加括号/braces 这样的问题。if else 中 else 的位置也是固定的。另一方面，你可以用无条件的 switch 来更清楚地表达 if-then-else。</description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>./go/oo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./go/oo/</guid>
+      <description>Object Orientation Golang 中没有 class。它的面向对象的实现，可以用 struct 来做。
+type Record struct { Title string Dept string value int }  Golang 中变量和函数首字母大写相当于 public， 小写相当于 private，在包和结构体中都是如此。
+func (r Record) Publish() { fmt.Println(r.Title) } func (r *Record) setTitle(s string) { r.Title = s }  Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 func 后加上函数操作的对象，对象加 * 则传指针，不加时传值。
+record := &amp;amp;Record{} record.Title = &amp;quot;New Time&amp;quot; record2 := &amp;amp;Record{Title: &amp;quot;Two&amp;quot;} record3 := new(Record) record3.Title = &amp;quot;Three&amp;quot; record4 := Record{} record4.Title = &amp;quot;Four&amp;quot; record5 := Record{Title: &amp;quot;Five&amp;quot;}  对象实例化。加 &amp;amp; 和 new 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</description>
     </item>
     
   </channel>

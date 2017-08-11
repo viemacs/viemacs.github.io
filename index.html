@@ -637,6 +637,73 @@ ctry+e: 下滚一行。
     
         
 
+<h2 id="object-orientation">Object Orientation</h2>
+
+<p>Golang 中没有 <code>class</code>。它的面向对象的实现，可以用 <code>struct</code> 来做。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">type</span> <span class="nx">Record</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Title</span> <span class="kt">string</span>
+    <span class="nx">Dept</span> <span class="kt">string</span>
+    <span class="nx">value</span> <span class="kt">int</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Golang 中变量和函数首字母大写相当于 <code>public</code>， 小写相当于 <code>private</code>，在包和结构体中都是如此。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="nx">Record</span><span class="p">)</span> <span class="nx">Publish</span><span class="p">()</span> <span class="p">{</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Title</span><span class="p">)</span> <span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Record</span><span class="p">)</span> <span class="nx">setTitle</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">s</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 <code>func</code> 后加上函数操作的对象，对象加 <code>*</code> 则传指针，不加时传值。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="nx">record</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{}</span>
+<span class="nx">record</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;New Time&quot;</span>
+<span class="nx">record2</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{</span><span class="nx">Title</span><span class="p">:</span> <span class="s">&quot;Two&quot;</span><span class="p">}</span>
+<span class="nx">record3</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Record</span><span class="p">)</span>
+<span class="nx">record3</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;Three&quot;</span>
+<span class="nx">record4</span> <span class="o">:=</span> <span class="nx">Record</span><span class="p">{}</span>
+<span class="nx">record4</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;Four&quot;</span>
+<span class="nx">record5</span> <span class="o">:=</span> <span class="nx">Record</span><span class="p">{</span><span class="nx">Title</span><span class="p">:</span> <span class="s">&quot;Five&quot;</span><span class="p">}</span>
+</code></pre></div>
+
+<p>对象实例化。加 <code>&amp;</code> 和 <code>new</code> 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">func</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="nx">param</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">p</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">Record</span>
+<span class="kd">func</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="nx">title</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Record</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">r</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{}</span>
+    <span class="nx">r</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">title</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+<span class="nx">record</span> <span class="o">:=</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="s">&quot;Initialized&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Golang 并没有构造函数，一般也不要用。如果想在初始化时额外做些事的话，要自己写方法来生成实例。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">type</span> <span class="nx">Record</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Title</span> <span class="kt">string</span>
+    <span class="nx">Dept</span> <span class="kt">string</span>
+    <span class="nx">value</span> <span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">type</span> <span class="nx">Archive</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Record</span>
+    <span class="nx">Dept</span> <span class="kt">string</span>
+    <span class="nx">Location</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="nx">archive</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Archive</span><span class="p">{}</span>
+<span class="nx">archive</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;Archive&quot;</span>
+<span class="nx">archive</span><span class="p">.</span><span class="nx">Dept</span> <span class="p">=</span> <span class="s">&quot;A-20&quot;</span>
+<span class="nx">archive</span><span class="p">.</span><span class="nx">Record</span><span class="p">.</span><span class="nx">Dept</span> <span class="p">=</span> <span class="s">&quot;Center&quot;</span>
+<span class="c1">// partial print</span>
+<span class="o">&amp;</span><span class="p">{{</span> <span class="nx">Center</span> <span class="p">}</span> <span class="nx">A</span><span class="o">-</span><span class="mi">20</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>Golang 的继承/组合，cmoposition。在属性冲突时，使用 <code>Archive</code> 中的，而 <code>Record</code> 中的用 <code>archive.Record.Dept</code> 访问。</p>
+
+<p>Golang 不支持重载，重载属于 <code>redeclared</code> 错误，但可以使用不定参数来处理不同参数调用。<br />
+<code>func (r *Record) bar(args ...interface{}) { fmt.Println(args) }</code></p>
+
+<p><strong>接口</strong></p>
+
+<p>TBC</p>
+
+    
+        
+
 <h1 id="javascript">Javascript</h1>
 
 <h2 id="thoughts">Thoughts</h2>
