@@ -1865,8 +1865,66 @@ JS 的函数对象可以将不变属性放在 prototype 中，对于只使用不
 
 <ul>
 <li>copy<br />
-就是将所有父类的属性和方法</li>
+就是将所有父类的属性和方法在子类中复制一份。</li>
 </ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">()</span> <span class="p">{}</span>
+<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Record&quot;</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> 
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+        <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+
+<h3 id="一般对象继承">一般对象继承</h3>
+
+<p>无构造函数的普通对象的继承。
+<code>let Record = {title: &quot;Record&quot;};</code></p>
+
+<ul>
+<li>通过 object 函数</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">object</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">Personnel</span> <span class="o">=</span> <span class="nx">object</span><span class="p">(</span><span class="nx">Record</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li>浅复制</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span>
+        <span class="nx">c</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">Personnel</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Record</span><span class="p">);</span>
+</code></pre></div>
+
+<p>浅复制在父对象的成员也是对象时，会把对象地址复制给子类，造成子类可以修改父类。</p>
+
+<ul>
+<li>深复制</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">Parent</span><span class="p">,</span> <span class="nx">Child</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">Child</span> <span class="o">=</span> <span class="nx">Child</span> <span class="o">||</span> <span class="p">{};</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Child</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">Array</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="p">{};</span>
+            <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">Child</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">Child</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">Child</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 
     
         
