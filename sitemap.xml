@@ -91,6 +91,14 @@
   </url>
   
   <url>
+    <loc>./network/access/</loc>
+  </url>
+  
+  <url>
+    <loc>./network/cloud/</loc>
+  </url>
+  
+  <url>
     <loc>./network/proxy/</loc>
   </url>
   
@@ -121,11 +129,6 @@
   <url>
     <loc>./python/</loc>
     <lastmod>2017-07-22T11:51:17+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>./network/</loc>
-    <lastmod>2017-07-21T23:10:37+08:00</lastmod>
   </url>
   
   <url>
@@ -183,7 +186,7 @@
   
   <url>
     <loc>./network/</loc>
-    <lastmod>2017-07-21T23:10:37+08:00</lastmod>
+    <lastmod>2017-07-20T11:16:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   

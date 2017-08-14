@@ -6,10 +6,36 @@
     <description>Recent content in Networks on Viemacs Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jul 2017 23:10:37 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jul 2017 11:16:50 +0800</lastBuildDate>
     
 	<atom:link href="./network/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Network</title>
+      <link>./network/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./network/access/</guid>
+      <description> Network </description>
+    </item>
+    
+    <item>
+      <title>Network</title>
+      <link>./network/cloud/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./network/cloud/</guid>
+      <description>Cloud 云计算，是用互联网来接入存储或者运行在远程服务器端的应用，数据，服务。所以云计算行业包括了使用基于互联网的方法来计算，存储和开发的公司，或说是在互联网上提供其服务的公司。
+IaaS, PasS, SaaS 云计算可以分为不同层次：基础设施-平台-软件，即 Infrastructure as a Service, Platform as a Service, Software as a Service。
+ IaaS: Infrastructure-as-a-Service 基础设施即服务
+提供了远程服务器、存储等网络硬件，使企业在运行应用时不再需要购买服务器等硬件，节省了维护成本和办公场地。实际提供 IaaS 的公司，如 Amozon，MicroSoft，VMWare，Rackspace，RedHat，不仅提供服务器，还会单独提供计算能力。
+ Paas: Platform-as-a-Service 平台即服务
+PaaS，也可以叫中间件，使企业的所有开发都能够在这里进行，以节省时间和资源。PaaS 提供了各种开发和分发应用的解决方案，如虚拟服务器和操作系统。如网页应用管理、应用设计、应用虚拟主机、存储、安全、应用开发协作工具。
+大型 PaaS 提供商有: Google App Engine, Microsoft Azure, Force.com, Heroku, Engine Yard; 以及新兴的 AppFog, Mendix, Standing Cloud.
+ SaaS: Software-as-a-Service 软件即服务
+通过远程服务器来运行的应用，就属于 SaaS，也是消费者每天接触到的一层云服务。这类服务常由网页接入，商用+家用的如 Netflx, MOG, Google Apps, Box.net, Dropbox, iCloud。商用 SaaS 应用如 GoToMeeting (Citrix), WebEx (Cisco), CRM (Salesforce), ADP, SuccessFactors (Workday)。</description>
+    </item>
     
     <item>
       <title>Network</title>
@@ -22,17 +48,6 @@
 正向代理中，客户端通过代理服务器隐藏了自身，如果需要安全性，可以在客户端连接代理服务器时进行鉴权。
 用途
  正向代理：向在防火墙内的局域网客户端提供外网的访问；使用缓冲可以减少对外网的网络访问。 反向代理：向外网提供防火墙内的服务器访问；为后端多服务器提供负载平衡；为后端低速服务器提供缓冲；在一个URL空间下提供多服务器多页面的内容。  </description>
-    </item>
-    
-    <item>
-      <title>Index</title>
-      <link>./network/</link>
-      <pubDate>Fri, 21 Jul 2017 23:10:37 +0800</pubDate>
-      
-      <guid>./network/</guid>
-      <description> Network header 2 inline code
-int main(){return 0;}  some code in python
-def foo(): pass  </description>
     </item>
     
     <item>
