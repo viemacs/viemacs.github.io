@@ -22,6 +22,24 @@
     </item>
     
     <item>
+      <title>Agile</title>
+      <link>./agile/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/access/</guid>
+      <description> Agile </description>
+    </item>
+    
+    <item>
+      <title>Agile</title>
+      <link>./agile/scrum/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/scrum/</guid>
+      <description> Scrum </description>
+    </item>
+    
+    <item>
       <title>Algorithm</title>
       <link>./algorithm/access/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -114,6 +132,24 @@ Software entities should be open for extension, but closed for modification. 模
 分布式环境下的事件驱动在编程模型的抽象性和简易性上有好处，但在控制性上有欠缺。消息强迫我们去拥抱分布式系统的真实性和一致性。你需要去考虑局部错误，错误侦测，丢弃/复制/重排序消息 （partial failures, failure detection, dropped/duplicated/reordered），还有一致性问题，管理多个并发真实性（并发真实性？）。你需要面对它们，处理它们，而不是藏在低劣的抽象层后，假装网络并不存在，像是 EJB, RPC, CORBA, XA。
 在设计中，这种语义和适用性上的不同对应用有深刻的影响，包括分布式系统的复杂性中的弹性，韧性，移动性，位置透明和管理。
 在使用了响应式编程技术的响应式系统中，有用于沟通的消息，也不呈现现实的事件。</description>
+    </item>
+    
+    <item>
+      <title>Dist</title>
+      <link>./dist/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./dist/access/</guid>
+      <description> Dist </description>
+    </item>
+    
+    <item>
+      <title>Dist</title>
+      <link>./dist/kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./dist/kafka/</guid>
+      <description> Kafka </description>
     </item>
     
     <item>
