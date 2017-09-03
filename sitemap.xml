@@ -15,6 +15,18 @@
   </url>
   
   <url>
+    <loc>./agile/software-development/</loc>
+  </url>
+  
+  <url>
+    <loc>./agile/tdd/</loc>
+  </url>
+  
+  <url>
+    <loc>./agile/xp/</loc>
+  </url>
+  
+  <url>
     <loc>./algorithm/access/</loc>
   </url>
   
@@ -48,6 +60,10 @@
   
   <url>
     <loc>./dist/kafka/</loc>
+  </url>
+  
+  <url>
+    <loc>./ecs/access/</loc>
   </url>
   
   <url>
@@ -158,6 +174,18 @@
   </url>
   
   <url>
+    <loc>./agile/ci/</loc>
+  </url>
+  
+  <url>
+    <loc>./agile/gerrit/</loc>
+  </url>
+  
+  <url>
+    <loc>./agile/unittest/</loc>
+  </url>
+  
+  <url>
     <loc>./norm/code_review/</loc>
   </url>
   
@@ -192,6 +220,11 @@
   
   <url>
     <loc>./dist/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>./ecs/</loc>
     <priority>0</priority>
   </url>
   

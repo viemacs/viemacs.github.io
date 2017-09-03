@@ -28,5 +28,63 @@
       <description> Scrum </description>
     </item>
     
+    <item>
+      <title>Agile</title>
+      <link>./agile/software-development/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/software-development/</guid>
+      <description>Software Development 软件开发中要考虑的工程因素有进度, 成本, 质量, 维护 等等. 而现在软件开发中要面对需求变更, 不定需求, 无用户需求. 为解决这些问题, 软件行业在以下几个方面做出了成功的尝试: 流程工具, 设计, 测试, 人力.
+对于团队, 要做人员备份和 周期轮换.
+历史 产品实现的开发管理中需求, 设计, 实现, 验证, 维护所需要投入比成为了 7:6:7:13:67, 使软件开发难以为继.
+ NATO 在 1968 年提出的软件工程的概念, 强调软件开发的 系统化, 规范化, 数量化. Royce 在 1960 年提出了瀑布模型, 按照工程的方式为软件开发划分了阶段. 阶段划分使软件开发进度有所依循, 有 deadline/milestone 来跟踪阶段. 但瀑布模型的阶段间缺少反馈, 开发的结果在后期才可以清楚得看到, 问题的追溯与修正代价太大, 使得它不适应需求的变化. 现在的做法是在每个迭代中应用瀑布模型.   开发中目前的问题有需求和市场两方面. 需求通常是不确定的, 会不断变动的, 在开发初期无法掌握细节, 容易造成过度设计, 过度开发. 市场中则充满(同质)竞争, 市场的快速变化带来需求的快速变化, 需要开发过程能够快速响应.
+需求的不明确和频繁变化 -&amp;gt; 功能变更 -&amp;gt; 交付时间短 -&amp;gt; 测试不充分 -&amp;gt; 交付质量差 -&amp;gt; 修改成本 需求的不明确和频繁变化 -&amp;gt; 功能变更 -&amp;gt; 设计修改 -&amp;gt; 设计质量低 -&amp;gt; 修改成本 | 变更</description>
+    </item>
+    
+    <item>
+      <title>Agile</title>
+      <link>./agile/tdd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/tdd/</guid>
+      <description> Test Driven Development </description>
+    </item>
+    
+    <item>
+      <title>Agile</title>
+      <link>./agile/xp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/xp/</guid>
+      <description> XP, eXtreme Programming </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./agile/ci/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./agile/gerrit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/gerrit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>./agile/unittest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/unittest/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
