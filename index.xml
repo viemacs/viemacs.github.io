@@ -32,11 +32,30 @@
     
     <item>
       <title>Agile</title>
+      <link>./agile/ci/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/ci/</guid>
+      <description>CI Continuous Integration
+持续集成已经是敏捷编程的基石之一. 在 TW 网站 上列出了比较流行的 CI Server. 在现在流行的 Java 领域中, 比较流行和有名的 CI Server 有:
+ CruiseControl Hudson LuntBuild TeamCity AntHill Pro Bamboo QuickBuild  Contents
+ CruiseControl Hudson LuntBuild TeamCity AntHill Pro Bamboo QuickBuild   CruiseControl CruiseControl by Thought Works,
+ Hudson Maybe the mostly used CI Server now.
+ LuntBuild  QuickBuild Business version of LuntBuild. Now it has a community Edition, full functional, but limited on configuration-number.</description>
+    </item>
+    
+    <item>
+      <title>Agile</title>
       <link>./agile/scrum/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>./agile/scrum/</guid>
-      <description> Scrum </description>
+      <description>Scrum Agile &amp;amp; Lean
+Lean &amp;ndash;&amp;gt; Lean Software &amp;ndash;&amp;gt; Scrum &amp;lt;&amp;ndash; Design Pattern v v &amp;ndash;&amp;gt; Kanban &amp;lt;&amp;ndash; Agile &amp;lt;&amp;ndash; eXtreme Programming &amp;ndash;&amp;gt; Lean Startup
+Agile: 质量, 生产率, 价值 Lean: 消除浪费
+Agile: Scrum, 框架和过程; XP, 实践; FDD Kanban, Lean DSDM, crystal
+[Video]: Jeff Sutherland breaks down the structure of scrum [Docu]: Scrum Guide by Ken Schwaher
+Meeting: Beginning, End, Daily Role: Scrum Master, Product Owner, Team Reporting: Burn-down chart, self-reporting</description>
     </item>
     
     <item>
@@ -54,11 +73,15 @@
     
     <item>
       <title>Agile</title>
-      <link>./agile/tdd/</link>
+      <link>./agile/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>./agile/tdd/</guid>
-      <description> Test Driven Development </description>
+      <guid>./agile/test/</guid>
+      <description>Unit Test Questions  C 语言的单元测试工具  About Unit Test WHAT 对一个明确的功能/函数, 测试其在给定条件下的工作是否正确.
+Unit test &amp;gt; Integration test &amp;gt; Automated Gui-tesst &amp;gt; Manual Test
+Unit, Components: 成本低, 效率高, 缺陷晚定位 Acceptance, API User Interface, Manual: 反映真实需求, 接近业务
+WHY  验证每一项功能的正确性, 为后续开发提供支撑 回归性. 避免代码修改影响原有功能 思考设计. Test-First, 要把程序设计成易调用, 可测试, 低耦合的结构 本身是可工作的文档. A working/functional document, 展示函数/类/接口的功能的使用方法  Value
+ 要了解功能和函数行为, 才能写好单元测试 写单元测试是用现在的时间换将来的时间 单元测试是白盒测试  HOW  测试工具 断言 assert Mock @Runwith @Mock @Test  Java: JUnit, Hamcrest, Mockito</description>
     </item>
     
     <item>
@@ -103,7 +126,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>./c/memory/</guid>
-      <description>Memory #include &amp;lt;string.h&amp;gt; int g_a = 0; // global, initialized int* g_p; // global, uninitialized int main() { int a; // stack char s[] = &amp;quot;ab&amp;quot;; // s: stack, &amp;quot;ab&amp;quot; constant char *p1; // static char *p2 = &amp;quot;12&amp;quot;; // p2: stack, &amp;quot;12&amp;quot; constant static int b = 0;// static g_p = (char *)malloc(8); // heap p1 = (char *)malloc(8); // heap strcpy(g_p, &amp;quot;12&amp;quot;); // &amp;quot;12&amp;quot; constant // the memory might be optimized by compiler and use the same memory as p2 return 0; }  内存分配方式中的 栈、堆-自由存储区、全局与静态存储区、常量存储区  栈</description>
+      <description>Memory #include &amp;lt;string.h&amp;gt;int g_a = 0; // global, initialized int* g_p; // global, uninitialized int main() { int a; // stack  char s[] = &amp;#34;ab&amp;#34;; // s: stack, &amp;#34;ab&amp;#34; constant  char *p1; // static  char *p2 = &amp;#34;12&amp;#34;; // p2: stack, &amp;#34;12&amp;#34; constant  static int b = 0;// static  g_p = (char *)malloc(8); // heap  p1 = (char *)malloc(8); // heap  strcpy(g_p, &amp;#34;12&amp;#34;); // &amp;#34;12&amp;#34; constant  // the memory might be optimized by compiler and use the same memory as p2  return 0; } 内存分配方式中的 栈、堆-自由存储区、全局与静态存储区、常量存储区  栈</description>
     </item>
     
     <item>
@@ -227,8 +250,8 @@ Software entities should be open for extension, but closed for modification. 模
       
       <guid>./go/access/</guid>
       <description>Golang The Design Go 看上去是 C 而不是 C++。我自己在学习和项目使用时，并没有很在意 C 和 C++ 的区别，但看到 Go 时，发现了许多不同。
-package foobar type Bar struct { n int } func (b *Bar) foo() int { return b.n }  Go 语言在设计中的感觉是追求显式表达，避免隐式表达。
-class Bar(object): n = &amp;quot;a local variable&amp;quot; def __init__(self): self.n = 0 def foo(self): pass  Python 中也有相似的地方，在类中显式地写出self，对self的操作才是对对象的操作。
+package foobar type Bar struct { n int } func (b *Bar) foo() int { return b.n } Go 语言在设计中的感觉是追求显式表达，避免隐式表达。
+class Bar(object): n = &amp;#34;a local variable&amp;#34; def __init__(self): self.n = 0 def foo(self): pass Python 中也有相似的地方，在类中显式地写出self，对self的操作才是对对象的操作。
 但 Go 中向对象增加方法method也要显式地写出对象。
 Go 中不支持参数默认值，函数重载。C 也不支持，是 C++ 支持。
 参数默认值其实是一种隐式表达。调用者仅看名字，不去查看默认参数时，有时会遇到参数默认值导致问题，给调试带来不少麻烦。
@@ -243,9 +266,9 @@ Go 中不支持参数默认值，函数重载。C 也不支持，是 C++ 支持�
       
       <guid>./go/oo/</guid>
       <description>Object Orientation Golang 中没有 class。它的面向对象的实现，可以用 struct 来做。
-type Record struct { Title string Dept string value int }  Golang 中变量和函数首字母大写相当于 public， 小写相当于 private，在包和结构体中都是如此。
-func (r Record) Publish() { fmt.Println(r.Title) } func (r *Record) setTitle(s string) { r.Title = s }  Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 func 后加上函数操作的对象，对象加 * 则传指针，不加时传值。
-record := &amp;amp;Record{} record.Title = &amp;quot;New Time&amp;quot; record2 := &amp;amp;Record{Title: &amp;quot;Two&amp;quot;} record3 := new(Record) record3.Title = &amp;quot;Three&amp;quot; record4 := Record{} record4.Title = &amp;quot;Four&amp;quot; record5 := Record{Title: &amp;quot;Five&amp;quot;}  对象实例化。加 &amp;amp; 和 new 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</description>
+type Record struct { Title string Dept string value int } Golang 中变量和函数首字母大写相当于 public， 小写相当于 private，在包和结构体中都是如此。
+func (r Record) Publish() { fmt.Println(r.Title) } func (r *Record) setTitle(s string) { r.Title = s } Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 func 后加上函数操作的对象，对象加 * 则传指针，不加时传值。
+record := &amp;amp;Record{} record.Title = &amp;#34;New Time&amp;#34; record2 := &amp;amp;Record{Title: &amp;#34;Two&amp;#34;} record3 := new(Record) record3.Title = &amp;#34;Three&amp;#34; record4 := Record{} record4.Title = &amp;#34;Four&amp;#34; record5 := Record{Title: &amp;#34;Five&amp;#34;} 对象实例化。加 &amp;amp; 和 new 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</description>
     </item>
     
     <item>
@@ -315,10 +338,10 @@ host: 连接数据库所在的主机名. (默认: localhost) port: 连接端口.
       <description>Object-Oriented Programming of Javascript notes of 1 2 3
 JS 的对象 JS 本身是基于对象的语言，在 JS 中所操作的基本都是对象。但在 ES2015 之前它又没有 class 的类。
 如果要从原型对象生成实例对象，要把属性和方法封装到对象里。properties and methods
- 对象实例  let record = { name: &amp;quot;&amp;quot;, nation: &amp;quot;&amp;quot; };  Schema 规格
-let record1 = { name: &amp;quot;Alpha&amp;quot;, nation: &amp;quot;China&amp;quot; }; let record2 = { name: &amp;quot;Beta, nation: &amp;quot;Denmark&amp;quot; };  给对象赋予属性和方法
+ 对象实例  let record = { name: &amp;#34;&amp;#34;, nation: &amp;#34;&amp;#34; }; Schema 规格
+let record1 = { name: &amp;#34;Alpha&amp;#34;, nation: &amp;#34;China&amp;#34; }; let record2 = { name: &amp;#34;Beta, nation: &amp;#34;Denmark&amp;#34; }; 给对象赋予属性和方法
 这可以看作最简单的封装，但原型和实例间并不存在内在联系。
-function Record(name, nation) { return { name: name, nation: nation, }; } let record1 = Record(&amp;quot;Alpha&amp;quot;, &amp;quot;China&amp;quot;); let record2 = Record(&amp;quot;Beta&amp;quot;, &amp;quot;Denmark&amp;quot;);  用函数调用返回对象方式可以在原型和实例间建立一定联系，但两个实例间没有内在联系。</description>
+function Record(name, nation) { return { name: name, nation: nation, }; } let record1 = Record(&amp;#34;Alpha&amp;#34;, &amp;#34;China&amp;#34;); let record2 = Record(&amp;#34;Beta&amp;#34;, &amp;#34;Denmark&amp;#34;); 用函数调用返回对象方式可以在原型和实例间建立一定联系，但两个实例间没有内在联系。</description>
     </item>
     
     <item>
@@ -466,7 +489,7 @@ $ gcc -c -o test.o test.c $ gcc -o helloworld test.o  The dependency line is: te
       <pubDate>Sat, 22 Jul 2017 11:51:17 +0800</pubDate>
       
       <guid>./python/</guid>
-      <description>Python Class 自带函数 class Foor(object): def __init__(self, *args, **kwargs): print(&amp;#39;init&amp;#39;) super(Bar, self).__init__(*args, **kwargs) def __new__(cls, *args, **kwargs): print(&amp;#39;new&amp;#39;) return super(Bar, cls).__new__(cls, *args, **kwargs) def __call__(self, *args, **kwargs): print(&amp;#39;call&amp;#39;) foo = Bar() foo() # Result: new init call   __init__(self, *args, **kwargs)
+      <description>Python Class 自带函数 class Foor(object): def __init__(self, *args, **kwargs): print(&amp;#39;init&amp;#39;) super(Bar, self).__init__(*args, **kwargs) def __new__(cls, *args, **kwargs): print(&amp;#39;new&amp;#39;) return super(Bar, cls).__new__(cls, *args, **kwargs) def __call__(self, *args, **kwargs): print(&amp;#39;call&amp;#39;) foo = Bar() foo() # Result: new init call  __init__(self, *args, **kwargs)
 在对象创建完成后调用，对当前对象实例进行初始化，无返回值。
  __new__(cls, *args, **kwargs)
 创建对象时调用，返回当前对象的一个实例。
@@ -495,28 +518,10 @@ $ gcc -c -o test.o test.c $ gcc -o helloworld test.o  The dependency line is: te
     
     <item>
       <title></title>
-      <link>./agile/ci/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>./agile/ci/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>./agile/gerrit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>./agile/gerrit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>./agile/unittest/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>./agile/unittest/</guid>
       <description></description>
     </item>
     

@@ -17,7 +17,7 @@
       <pubDate>Sat, 22 Jul 2017 11:51:17 +0800</pubDate>
       
       <guid>./python/</guid>
-      <description>Python Class 自带函数 class Foor(object): def __init__(self, *args, **kwargs): print(&amp;#39;init&amp;#39;) super(Bar, self).__init__(*args, **kwargs) def __new__(cls, *args, **kwargs): print(&amp;#39;new&amp;#39;) return super(Bar, cls).__new__(cls, *args, **kwargs) def __call__(self, *args, **kwargs): print(&amp;#39;call&amp;#39;) foo = Bar() foo() # Result: new init call   __init__(self, *args, **kwargs)
+      <description>Python Class 自带函数 class Foor(object): def __init__(self, *args, **kwargs): print(&amp;#39;init&amp;#39;) super(Bar, self).__init__(*args, **kwargs) def __new__(cls, *args, **kwargs): print(&amp;#39;new&amp;#39;) return super(Bar, cls).__new__(cls, *args, **kwargs) def __call__(self, *args, **kwargs): print(&amp;#39;call&amp;#39;) foo = Bar() foo() # Result: new init call  __init__(self, *args, **kwargs)
 在对象创建完成后调用，对当前对象实例进行初始化，无返回值。
  __new__(cls, *args, **kwargs)
 创建对象时调用，返回当前对象的一个实例。

@@ -17,8 +17,8 @@
       
       <guid>./go/access/</guid>
       <description>Golang The Design Go 看上去是 C 而不是 C++。我自己在学习和项目使用时，并没有很在意 C 和 C++ 的区别，但看到 Go 时，发现了许多不同。
-package foobar type Bar struct { n int } func (b *Bar) foo() int { return b.n }  Go 语言在设计中的感觉是追求显式表达，避免隐式表达。
-class Bar(object): n = &amp;quot;a local variable&amp;quot; def __init__(self): self.n = 0 def foo(self): pass  Python 中也有相似的地方，在类中显式地写出self，对self的操作才是对对象的操作。
+package foobar type Bar struct { n int } func (b *Bar) foo() int { return b.n } Go 语言在设计中的感觉是追求显式表达，避免隐式表达。
+class Bar(object): n = &amp;#34;a local variable&amp;#34; def __init__(self): self.n = 0 def foo(self): pass Python 中也有相似的地方，在类中显式地写出self，对self的操作才是对对象的操作。
 但 Go 中向对象增加方法method也要显式地写出对象。
 Go 中不支持参数默认值，函数重载。C 也不支持，是 C++ 支持。
 参数默认值其实是一种隐式表达。调用者仅看名字，不去查看默认参数时，有时会遇到参数默认值导致问题，给调试带来不少麻烦。
@@ -33,9 +33,9 @@ Go 中不支持参数默认值，函数重载。C 也不支持，是 C++ 支持�
       
       <guid>./go/oo/</guid>
       <description>Object Orientation Golang 中没有 class。它的面向对象的实现，可以用 struct 来做。
-type Record struct { Title string Dept string value int }  Golang 中变量和函数首字母大写相当于 public， 小写相当于 private，在包和结构体中都是如此。
-func (r Record) Publish() { fmt.Println(r.Title) } func (r *Record) setTitle(s string) { r.Title = s }  Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 func 后加上函数操作的对象，对象加 * 则传指针，不加时传值。
-record := &amp;amp;Record{} record.Title = &amp;quot;New Time&amp;quot; record2 := &amp;amp;Record{Title: &amp;quot;Two&amp;quot;} record3 := new(Record) record3.Title = &amp;quot;Three&amp;quot; record4 := Record{} record4.Title = &amp;quot;Four&amp;quot; record5 := Record{Title: &amp;quot;Five&amp;quot;}  对象实例化。加 &amp;amp; 和 new 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</description>
+type Record struct { Title string Dept string value int } Golang 中变量和函数首字母大写相当于 public， 小写相当于 private，在包和结构体中都是如此。
+func (r Record) Publish() { fmt.Println(r.Title) } func (r *Record) setTitle(s string) { r.Title = s } Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 func 后加上函数操作的对象，对象加 * 则传指针，不加时传值。
+record := &amp;amp;Record{} record.Title = &amp;#34;New Time&amp;#34; record2 := &amp;amp;Record{Title: &amp;#34;Two&amp;#34;} record3 := new(Record) record3.Title = &amp;#34;Three&amp;#34; record4 := Record{} record4.Title = &amp;#34;Four&amp;#34; record5 := Record{Title: &amp;#34;Five&amp;#34;} 对象实例化。加 &amp;amp; 和 new 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</description>
     </item>
     
   </channel>

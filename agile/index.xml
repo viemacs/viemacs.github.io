@@ -21,11 +21,30 @@
     
     <item>
       <title>Agile</title>
+      <link>./agile/ci/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>./agile/ci/</guid>
+      <description>CI Continuous Integration
+持续集成已经是敏捷编程的基石之一. 在 TW 网站 上列出了比较流行的 CI Server. 在现在流行的 Java 领域中, 比较流行和有名的 CI Server 有:
+ CruiseControl Hudson LuntBuild TeamCity AntHill Pro Bamboo QuickBuild  Contents
+ CruiseControl Hudson LuntBuild TeamCity AntHill Pro Bamboo QuickBuild   CruiseControl CruiseControl by Thought Works,
+ Hudson Maybe the mostly used CI Server now.
+ LuntBuild  QuickBuild Business version of LuntBuild. Now it has a community Edition, full functional, but limited on configuration-number.</description>
+    </item>
+    
+    <item>
+      <title>Agile</title>
       <link>./agile/scrum/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>./agile/scrum/</guid>
-      <description> Scrum </description>
+      <description>Scrum Agile &amp;amp; Lean
+Lean &amp;ndash;&amp;gt; Lean Software &amp;ndash;&amp;gt; Scrum &amp;lt;&amp;ndash; Design Pattern v v &amp;ndash;&amp;gt; Kanban &amp;lt;&amp;ndash; Agile &amp;lt;&amp;ndash; eXtreme Programming &amp;ndash;&amp;gt; Lean Startup
+Agile: 质量, 生产率, 价值 Lean: 消除浪费
+Agile: Scrum, 框架和过程; XP, 实践; FDD Kanban, Lean DSDM, crystal
+[Video]: Jeff Sutherland breaks down the structure of scrum [Docu]: Scrum Guide by Ken Schwaher
+Meeting: Beginning, End, Daily Role: Scrum Master, Product Owner, Team Reporting: Burn-down chart, self-reporting</description>
     </item>
     
     <item>
@@ -43,11 +62,15 @@
     
     <item>
       <title>Agile</title>
-      <link>./agile/tdd/</link>
+      <link>./agile/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>./agile/tdd/</guid>
-      <description> Test Driven Development </description>
+      <guid>./agile/test/</guid>
+      <description>Unit Test Questions  C 语言的单元测试工具  About Unit Test WHAT 对一个明确的功能/函数, 测试其在给定条件下的工作是否正确.
+Unit test &amp;gt; Integration test &amp;gt; Automated Gui-tesst &amp;gt; Manual Test
+Unit, Components: 成本低, 效率高, 缺陷晚定位 Acceptance, API User Interface, Manual: 反映真实需求, 接近业务
+WHY  验证每一项功能的正确性, 为后续开发提供支撑 回归性. 避免代码修改影响原有功能 思考设计. Test-First, 要把程序设计成易调用, 可测试, 低耦合的结构 本身是可工作的文档. A working/functional document, 展示函数/类/接口的功能的使用方法  Value
+ 要了解功能和函数行为, 才能写好单元测试 写单元测试是用现在的时间换将来的时间 单元测试是白盒测试  HOW  测试工具 断言 assert Mock @Runwith @Mock @Test  Java: JUnit, Hamcrest, Mockito</description>
     </item>
     
     <item>
@@ -61,28 +84,10 @@
     
     <item>
       <title></title>
-      <link>./agile/ci/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>./agile/ci/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>./agile/gerrit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>./agile/gerrit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>./agile/unittest/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>./agile/unittest/</guid>
       <description></description>
     </item>
     

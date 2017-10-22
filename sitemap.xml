@@ -11,6 +11,10 @@
   </url>
   
   <url>
+    <loc>./agile/ci/</loc>
+  </url>
+  
+  <url>
     <loc>./agile/scrum/</loc>
   </url>
   
@@ -19,7 +23,7 @@
   </url>
   
   <url>
-    <loc>./agile/tdd/</loc>
+    <loc>./agile/test/</loc>
   </url>
   
   <url>
@@ -174,15 +178,7 @@
   </url>
   
   <url>
-    <loc>./agile/ci/</loc>
-  </url>
-  
-  <url>
     <loc>./agile/gerrit/</loc>
-  </url>
-  
-  <url>
-    <loc>./agile/unittest/</loc>
   </url>
   
   <url>

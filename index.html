@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.26" />
+	<meta name="generator" content="Hugo 0.30.2" />
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -81,7 +81,208 @@ Administrator. It usually boils down to these three things:</p>
     
         
 
+<h2 id="ci">CI</h2>
+
+<p><strong>Continuous Integration</strong></p>
+
+<p>持续集成已经是敏捷编程的基石之一. 在 <a href="http://confluence.public.thoughtworks.org/display/CC/CI+Feature+Matrix">TW 网站</a> 上列出了比较流行的 CI Server. 在现在流行的 Java 领域中, 比较流行和有名的 CI Server 有:</p>
+
+<ul>
+<li><a href="http://curisecontrol.sourceforgee.net/">CruiseControl</a></li>
+<li><a href="https://hudson.dev.java.net/">Hudson</a></li>
+<li><a href="http://luntbuild.javaforge.com/">LuntBuild</a></li>
+<li><a href="http://www.jetbrains.com/teamcity/">TeamCity</a></li>
+<li><a href="http://www.anthillpro.com/">AntHill Pro</a></li>
+<li><a href="http://www.atlassian.com/software/bamboo/">Bamboo</a></li>
+<li><a href="http://www.pmease.com/">QuickBuild</a></li>
+</ul>
+
+<p>Contents</p>
+
+<ul>
+<li><a href="#CruiseControl">CruiseControl</a></li>
+<li><a href="#Hudson">Hudson</a></li>
+<li><a href="#LuntBuild">LuntBuild</a></li>
+<li><a href="#TeamCity">TeamCity</a></li>
+<li><a href="#AntHillPro">AntHill Pro</a></li>
+<li><a href="#Bamboo">Bamboo</a></li>
+<li><a href="#QuickBuild">QuickBuild</a></li>
+</ul>
+
+<h3 id="a-name-cruisecontrol-a-cruisecontrol"><a name="CruiseControl"></a> CruiseControl</h3>
+
+<p>CruiseControl by Thought Works,</p>
+
+<h3 id="a-name-hudson-a-hudson"><a name="Hudson"></a> Hudson</h3>
+
+<p>Maybe the <strong>mostly used</strong> CI Server now.</p>
+
+<h3 id="a-name-luntbuild-a-luntbuild"><a name="LuntBuild"></a> LuntBuild</h3>
+
+<h3 id="a-name-quickbuild-a-quickbuild"><a name="QuickBuild"></a> QuickBuild</h3>
+
+<p>Business version of LuntBuild. Now it has a community Edition, full functional, but limited on configuration-number.</p>
+
+<h3 id="a-name-teamcity-a-teamcity"><a name="TeamCity"></a> TeamCity</h3>
+
+<p>TeamCity by Jetbrains. Most used among propriety CI Servers. It also has a free version.</p>
+
+<h3 id="a-name-anthillpro-a-anthillpro"><a name="AntHillPro"></a> AntHillPro</h3>
+
+<h3 id="a-name-bamboo-a-bamboo"><a name="Bamboo"></a> Bamboo</h3>
+
+<p>Bamboo by Atlassian, who developed <em>Jira</em> and <em>Wiki Confluence</em>.</p>
+
+<hr />
+
+<h3 id="functions">Functions</h3>
+
+<p>The basic functionality of CI Server is a 定时调度器. Set a timer, and do some job. This function can be achieved by home-made tools, like cron + Ant/Maven.</p>
+
+<p>The extra functions of CI Server used in corporation:
+- 统一管理: 100+ 项目
+- 流程管理: Daily Build -&gt; QA Build -&gt; Release Build
+- 权限管理: connect to Active Directory, managing user authorization
+- 持续测试: Continuous Testing, 产生详尽的报告, 收集测试统计数据以分析和考量项目
+- 持续质检: Continuous Code Quality Analysis, 处理项目产生的 Coverage 报告, 代码静态分析报告
+- SCM集成: 与 VCS 集成, 如 ClearCase, Subversion, StarTeam
+- 工具集成: bug tracking, IDE, etc</p>
+
+<h3 id="config">config</h3>
+
+<p>一般使用 Project, Project Group 管理. TeamCity 的导航最方便. LuntBuild 和 QuickBuild 使用 Configuration/配置 的概念, 一个配置处理一个最基本的流程, 如 CheckOut, Build, Publish Artifacts; 这两者的人性化方面有所不足.</p>
+
+<p>QuickBuild 唯一支持配置树, 使用 Configuration 而不是 Project, 对多项目最为实用. QB 使用继承关系, 完成基本配置后, 其它的修改一下参数即可.</p>
+
+<p>TeamCity 支持 Project Group 和 Project 两层关系, 也没有继承关系, 只有 copy project 功能. 而 QB 可以拷贝整个子树, 因而可以制作配置模板, 在不同部门和项目间使用变量来控制.</p>
+
+<p>TeamCity 配置起来最方便. 另外它有 JUnit, NUnit 类的 Tests, 不用写 Ant 脚本, 可以直接找出项目里的 unit tests, 这个是它独有的.</p>
+
+<p>CruiseControl, Hudson, Bamboo 没有特别的优点.</p>
+
+<p>Daily Build, QA Build, Integration Build, Release Build. 每天, 每个 Sprint 做 QA 和 Integration.</p>
+
+<h3 id="tbd">TBD</h3>
+
+<p>如果团队使用 XP 编程, 要做 Commit Test Build, 每个提交自动触发一个 build, 保证构建和unit-tests和code-quality不受破坏. 即 Continuous testing 和 continuous code quality analysis, 这要利用 JUnit, NUnit, CheckStyle, PMD, Cobertura, FxCop 等工具实现.</p>
+
+    
+        
+
 <h2 id="scrum">Scrum</h2>
+
+<p><strong>Agile &amp; Lean</strong></p>
+
+<p>Lean &ndash;&gt; Lean Software &ndash;&gt; Scrum  &lt;&ndash; Design Pattern
+                             v              v
+     &ndash;&gt; Kanban        &lt;&ndash; Agile  &lt;&ndash; eXtreme Programming
+     &ndash;&gt; Lean Startup</p>
+
+<p>Agile: 质量, 生产率, 价值
+Lean: 消除浪费</p>
+
+<p>Agile: Scrum, 框架和过程; XP, 实践; FDD
+       Kanban, Lean
+       DSDM, crystal</p>
+
+<p>[Video]: Jeff Sutherland breaks down the structure of scrum
+[Docu]: Scrum Guide by Ken Schwaher</p>
+
+<p>Meeting: Beginning, End, Daily
+Role: Scrum Master, Product Owner, Team
+Reporting: Burn-down chart, self-reporting</p>
+
+<p>Daily Meeting:</p>
+
+<ul>
+<li>what everyone did</li>
+<li>what everyone going to do</li>
+<li>how one can help each other</li>
+</ul>
+
+<p>问题-措施-改进 的闭环改进</p>
+
+<p>v Product Backlog, 梳理
+v 工作计划, 规划
+v 冲刺列表
+v     每日列表
+v 冲刺执行
+v 产品增量, 潜在可交付
+v 冲刺评审
+v     inspect adapt
+v 冲刺回顾</p>
+
+<h3 id="scrum-guide">Scrum Guide</h3>
+
+<p>Annually Release</p>
+
+<p>Scrum 定义了角色, 事件, 工件, 和它们的组织规则.</p>
+
+<ul>
+<li>透明: 对产出负责的人, 要有统一理解, 对完成有一致的理解</li>
+<li>检视: 经常检视工作和目标的完成进度</li>
+<li>调整: 对流程超出标准的偏差, 对流程和流程的内容调整并尽快实施</li>
+</ul>
+
+<p>透明性是一个学习, 说服, 改变的过程, 不会一步完成<br />
+3-6 个月来有效使用 scrum, 按其机制运转</p>
+
+<p>迭代增量: 优化可预测性和风险管理</p>
+
+<p>Scrum Master 服务于 PO, 团队, 组织</p>
+
+<ul>
+<li>meetings
+
+<ul>
+<li>sprint 计划会</li>
+<li>每日 scrum 站会</li>
+<li>sprint 评审会</li>
+<li>sprint 回顾会</li>
+</ul></li>
+<li>Product Owner: 产品负责人
+
+<ul>
+<li>backlog 唯一负责人</li>
+<li>清晰表达产品待办列表项</li>
+<li>列表排序, 实现目标和使命</li>
+<li>优化团队所执行工作的价值</li>
+<li>清晰, 可见, 透明, 对每一个人展示下一步工作</li>
+<li>使团队对待办项有足够的理解</li>
+</ul></li>
+<li>团队
+
+<ul>
+<li>自组织, 跨职能</li>
+<li>最大化, 灵活性, 生产效率</li>
+<li>没有子团队, 每人有专长</li>
+<li>但责任属于团队</li>
+</ul></li>
+</ul>
+
+<p><em>团队规模 3-9 人</em>, 人少时没有足够互动, sprint 中技能受限; 人多需要过多协调沟通, 复杂性太高, 不便于经验管理. 团队要拥有开发产品增量的全部技能.</p>
+
+<p><em>事件</em>. 每个 sprint 作为一个项目, 周期在一个月内, 一般两周. 长度和时间节点必须固定, 完成的内容可调整.</p>
+
+<ul>
+<li>计划会: 1. 下个周期要做什么, 要包含什么内容; 2. 怎么完成所需的增量工作</li>
+<li>站会: 只有开发人员可参与</li>
+</ul>
+
+<p>工作</p>
+
+<ul>
+<li>产品待办列表: 有序列表, a list item 包含: 描述, 次序, 估算, 价值</li>
+<li>列表包含: 特性, 功能, 需求, 改进, 修复 等等对 sprint 有价值的任务和资源</li>
+</ul>
+
+<p>监控实际目标的进度</p>
+
+<ul>
+<li>burn-downs</li>
+<li>burn-ups</li>
+<li>cumulative flows 累积工作流</li>
+</ul>
 
     
         
@@ -191,7 +392,78 @@ Administrator. It usually boils down to these three things:</p>
     
         
 
-<h2 id="test-driven-development">Test Driven Development</h2>
+<h2 id="unit-test">Unit Test</h2>
+
+<h3 id="questions">Questions</h3>
+
+<ul>
+<li>C 语言的单元测试工具</li>
+</ul>
+
+<h3 id="about-unit-test">About Unit Test</h3>
+
+<h4 id="what">WHAT</h4>
+
+<p>对一个明确的功能/函数, 测试其在给定条件下的工作是否正确.</p>
+
+<p>Unit test &gt; Integration test &gt; Automated Gui-tesst &gt; Manual Test</p>
+
+<p>Unit, Components:  成本低, 效率高, 缺陷晚定位
+Acceptance, API
+User Interface, Manual: 反映真实需求, 接近业务</p>
+
+<h4 id="why">WHY</h4>
+
+<ul>
+<li>验证每一项功能的正确性, 为后续开发提供支撑</li>
+<li>回归性. 避免代码修改影响原有功能</li>
+<li>思考设计. Test-First, 要把程序设计成易调用, 可测试, 低耦合的结构</li>
+<li>本身是可工作的文档. A working/functional document, 展示函数/类/接口的功能的使用方法</li>
+</ul>
+
+<p><strong>Value</strong></p>
+
+<ul>
+<li>要了解功能和函数行为, 才能写好单元测试</li>
+<li>写单元测试是用现在的时间换将来的时间</li>
+<li>单元测试是白盒测试</li>
+</ul>
+
+<h4 id="how">HOW</h4>
+
+<ul>
+<li>测试工具</li>
+<li>断言 assert</li>
+<li>Mock @Runwith @Mock @Test</li>
+</ul>
+
+<p>Java: JUnit, Hamcrest, Mockito</p>
+
+<h3 id="test">Test</h3>
+
+<p>单元测试要点: Fast, Isolated, Repeatable, Self-verifying, Timely</p>
+
+<p><strong>Given, When, Then</strong> 模式</p>
+
+<p><strong>One test, One function</strong>, 一个测试测一个方法</p>
+
+<h3 id="mock">Mock</h3>
+
+<p>适用于所 mock 的对象</p>
+
+<ul>
+<li>难以创建</li>
+<li>难以触发</li>
+<li>响应缓慢</li>
+<li>用户界面</li>
+<li>尚未存在</li>
+</ul>
+
+<h2 id="tdd-test-driven-developing">TDD, Test Driven Developing</h2>
+
+<p>一种增量式软件开发方法</p>
+
+<p>实践: If tests pass, write no codes.</p>
 
     
         
@@ -207,17 +479,17 @@ Administrator. It usually boils down to these three things:</p>
         
 
 <h2 id="huffman-encoding">Huffman Encoding</h2>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="ow">and</span> <span class="n">right</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">left</span><span class="o">.</span><span class="n">weight</span> <span class="o">+</span> <span class="n">right</span><span class="o">.</span><span class="n">weight</span>
 
-    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">code</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">code</span> <span class="o">+</span> <span class="s1">&#39;0&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">code</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">code</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;0&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">code</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;1&#39;</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">r</span>
 
 
@@ -238,7 +510,7 @@ Administrator. It usually boils down to these three things:</p>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">/</span><span class="n">total</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
 
 <span class="c1"># test</span>
-<span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+<span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;E&#39;</span><span class="p">]</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">genHuffman</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 
@@ -260,12 +532,10 @@ Administrator. It usually boils down to these three things:</p>
 <span class="c1"># u	1	00111</span>
 <span class="c1"># x	1	10010</span>
 
-<span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;space&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;space&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">genHuffman</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">(),</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
-    <span class="k">print</span> <span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-</code></pre></div>
-
+    <span class="k">print</span> <span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></code></pre></div>
 <p>Huffman encoding goes from leaves to root, unlike Shanno-Fano encoding which goes from root to leaves.</p>
 
 <p>A simple alg using a priority queue.</p>
@@ -289,23 +559,21 @@ Administrator. It usually boils down to these three things:</p>
         
 
 <h2 id="memory">Memory</h2>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span></span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="n">g_a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// global, initialized</span>
-<span class="kt">int</span><span class="o">*</span> <span class="n">g_p</span><span class="p">;</span>    <span class="c1">// global, uninitialized</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>           <span class="c1">// stack</span>
-    <span class="kt">char</span> <span class="n">s</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;ab&quot;</span><span class="p">;</span> <span class="c1">// s: stack, &quot;ab&quot; constant</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>        <span class="c1">// static</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="s">&quot;12&quot;</span><span class="p">;</span> <span class="c1">// p2: stack, &quot;12&quot; constant</span>
-    <span class="k">static</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">// static</span>
-    <span class="n">g_p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span> <span class="c1">// heap</span>
-    <span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>  <span class="c1">// heap</span>
-    <span class="n">strcpy</span><span class="p">(</span><span class="n">g_p</span><span class="p">,</span> <span class="s">&quot;12&quot;</span><span class="p">);</span> <span class="c1">// &quot;12&quot; constant</span>
-                       <span class="c1">// the memory might be optimized by compiler and use the same memory as p2</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="n">g_a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// global, initialized
+</span><span class="c1"></span><span class="kt">int</span><span class="o">*</span> <span class="n">g_p</span><span class="p">;</span>    <span class="c1">// global, uninitialized
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>           <span class="c1">// stack
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">s</span><span class="p">[]</span> <span class="o">=</span> <span class="sa"></span><span class="s">&#34;ab&#34;</span><span class="p">;</span> <span class="c1">// s: stack, &#34;ab&#34; constant
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>        <span class="c1">// static
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="sa"></span><span class="s">&#34;12&#34;</span><span class="p">;</span> <span class="c1">// p2: stack, &#34;12&#34; constant
+</span><span class="c1"></span>    <span class="k">static</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">// static
+</span><span class="c1"></span>    <span class="n">g_p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span> <span class="c1">// heap
+</span><span class="c1"></span>    <span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>  <span class="c1">// heap
+</span><span class="c1"></span>    <span class="n">strcpy</span><span class="p">(</span><span class="n">g_p</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;12&#34;</span><span class="p">);</span> <span class="c1">// &#34;12&#34; constant
+</span><span class="c1"></span>                       <span class="c1">// the memory might be optimized by compiler and use the same memory as p2
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 <h3 id="内存分配方式中的-栈-堆-自由存储区-全局与静态存储区-常量存储区">内存分配方式中的 栈、堆-自由存储区、全局与静态存储区、常量存储区</h3>
 
 <ul>
@@ -326,14 +594,12 @@ Administrator. It usually boils down to these three things:</p>
 <h3 id="堆栈的区别">堆栈的区别</h3>
 
 <p>堆和栈的区别是大家常说起的一个问题。</p>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
     <span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></div>
 <p>指针 a 在栈上分配了一段内存，malloc 在堆上分配了一段4个整型大小的内存，然后把这段内存的首地址返回给指针 a。</p>
 
 <p>堆和栈的区别主要有5点。（中文中“堆栈”指栈。）</p>
@@ -819,7 +1085,7 @@ ctry+e: 下滚一行。
 <h2 id="the-design">The Design</h2>
 
 <p>Go 看上去是 C 而不是 C++。我自己在学习和项目使用时，并没有很在意 C 和 C++ 的区别，但看到 Go 时，发现了许多不同。</p>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">foobar</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">foobar</span>
 
 <span class="kd">type</span> <span class="nx">Bar</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">n</span> <span class="kt">int</span>
@@ -827,18 +1093,14 @@ ctry+e: 下滚一行。
 
 <span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">Bar</span><span class="p">)</span> <span class="nx">foo</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">b</span><span class="p">.</span><span class="nx">n</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></div>
 <p>Go 语言在设计中的感觉是<strong>追求显式表达，避免隐式表达</strong>。</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="s2">&quot;a local variable&quot;</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="sa"></span><span class="s2">&#34;a local variable&#34;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-</code></pre></div>
-
+        <span class="k">pass</span></code></pre></div>
 <p>Python 中也有相似的地方，在类中显式地写出<code>self</code>，对<code>self</code>的操作才是对对象的操作。<br />
 但 Go 中向对象增加方法<code>method</code>也要显式地写出对象。</p>
 
@@ -857,41 +1119,33 @@ ctry+e: 下滚一行。
 <h2 id="object-orientation">Object Orientation</h2>
 
 <p>Golang 中没有 <code>class</code>。它的面向对象的实现，可以用 <code>struct</code> 来做。</p>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">type</span> <span class="nx">Record</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Record</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">Title</span> <span class="kt">string</span>
     <span class="nx">Dept</span> <span class="kt">string</span>
     <span class="nx">value</span> <span class="kt">int</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></div>
 <p>Golang 中变量和函数首字母大写相当于 <code>public</code>， 小写相当于 <code>private</code>，在包和结构体中都是如此。</p>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="nx">Record</span><span class="p">)</span> <span class="nx">Publish</span><span class="p">()</span> <span class="p">{</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Title</span><span class="p">)</span> <span class="p">}</span>
-<span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Record</span><span class="p">)</span> <span class="nx">setTitle</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">s</span> <span class="p">}</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="nx">Record</span><span class="p">)</span> <span class="nx">Publish</span><span class="p">()</span> <span class="p">{</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Title</span><span class="p">)</span> <span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Record</span><span class="p">)</span> <span class="nx">setTitle</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">s</span> <span class="p">}</span></code></pre></div>
 <p>Golang 中结构体的方法声明与众不同，是普通函数的方式，并在 <code>func</code> 后加上函数操作的对象，对象加 <code>*</code> 则传指针，不加时传值。</p>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="nx">record</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{}</span>
-<span class="nx">record</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;New Time&quot;</span>
-<span class="nx">record2</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{</span><span class="nx">Title</span><span class="p">:</span> <span class="s">&quot;Two&quot;</span><span class="p">}</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">record</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{}</span>
+<span class="nx">record</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&#34;New Time&#34;</span>
+<span class="nx">record2</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{</span><span class="nx">Title</span><span class="p">:</span> <span class="s">&#34;Two&#34;</span><span class="p">}</span>
 <span class="nx">record3</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Record</span><span class="p">)</span>
-<span class="nx">record3</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;Three&quot;</span>
+<span class="nx">record3</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&#34;Three&#34;</span>
 <span class="nx">record4</span> <span class="o">:=</span> <span class="nx">Record</span><span class="p">{}</span>
-<span class="nx">record4</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;Four&quot;</span>
-<span class="nx">record5</span> <span class="o">:=</span> <span class="nx">Record</span><span class="p">{</span><span class="nx">Title</span><span class="p">:</span> <span class="s">&quot;Five&quot;</span><span class="p">}</span>
-</code></pre></div>
-
+<span class="nx">record4</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&#34;Four&#34;</span>
+<span class="nx">record5</span> <span class="o">:=</span> <span class="nx">Record</span><span class="p">{</span><span class="nx">Title</span><span class="p">:</span> <span class="s">&#34;Five&#34;</span><span class="p">}</span></code></pre></div>
 <p>对象实例化。加 <code>&amp;</code> 和 <code>new</code> 时，生成指针对象。一般当对象较小时，传值较好；对象较大时，传指针较好。</p>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">func</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="nx">param</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">p</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">Record</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="nx">param</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">p</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">Record</span>
 <span class="kd">func</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="nx">title</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Record</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">r</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Record</span><span class="p">{}</span>
     <span class="nx">r</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">title</span>
     <span class="k">return</span>
 <span class="p">}</span>
-<span class="nx">record</span> <span class="o">:=</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="s">&quot;Initialized&quot;</span><span class="p">)</span>
-</code></pre></div>
-
+<span class="nx">record</span> <span class="o">:=</span> <span class="nx">NewRecord</span><span class="p">(</span><span class="s">&#34;Initialized&#34;</span><span class="p">)</span></code></pre></div>
 <p>Golang 并没有构造函数，一般也不要用。如果想在初始化时额外做些事的话，要自己写方法来生成实例。</p>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kd">type</span> <span class="nx">Record</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Record</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">Title</span> <span class="kt">string</span>
     <span class="nx">Dept</span> <span class="kt">string</span>
     <span class="nx">value</span> <span class="kt">int</span>
@@ -902,13 +1156,11 @@ ctry+e: 下滚一行。
     <span class="nx">Location</span> <span class="kt">string</span>
 <span class="p">}</span>
 <span class="nx">archive</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Archive</span><span class="p">{}</span>
-<span class="nx">archive</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&quot;Archive&quot;</span>
-<span class="nx">archive</span><span class="p">.</span><span class="nx">Dept</span> <span class="p">=</span> <span class="s">&quot;A-20&quot;</span>
-<span class="nx">archive</span><span class="p">.</span><span class="nx">Record</span><span class="p">.</span><span class="nx">Dept</span> <span class="p">=</span> <span class="s">&quot;Center&quot;</span>
-<span class="c1">// partial print</span>
-<span class="o">&amp;</span><span class="p">{{</span> <span class="nx">Center</span> <span class="p">}</span> <span class="nx">A</span><span class="o">-</span><span class="mi">20</span> <span class="p">}</span>
-</code></pre></div>
-
+<span class="nx">archive</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="s">&#34;Archive&#34;</span>
+<span class="nx">archive</span><span class="p">.</span><span class="nx">Dept</span> <span class="p">=</span> <span class="s">&#34;A-20&#34;</span>
+<span class="nx">archive</span><span class="p">.</span><span class="nx">Record</span><span class="p">.</span><span class="nx">Dept</span> <span class="p">=</span> <span class="s">&#34;Center&#34;</span>
+<span class="c1">// partial print
+</span><span class="c1"></span><span class="o">&amp;</span><span class="p">{{</span> <span class="nx">Center</span> <span class="p">}</span> <span class="nx">A</span><span class="o">-</span><span class="mi">20</span> <span class="p">}</span></code></pre></div>
 <p>Golang 的继承/组合，cmoposition。在属性冲突时，使用 <code>Archive</code> 中的，而 <code>Record</code> 中的用 <code>archive.Record.Dept</code> 访问。</p>
 
 <p>Golang 不支持重载，重载属于 <code>redeclared</code> 错误，但可以使用不定参数来处理不同参数调用。<br />
@@ -963,12 +1215,10 @@ No trailing comma, less extra parentheses, and easier to read.</p>
 <h2 id="introduction">Introduction</h2>
 
 <h3 id="approaches-to-create-objects">Approaches to Create Objects</h3>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;direct assigned&#39;</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">newstr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s2">&quot;String instance initialization&quot;</span><span class="p">)</span>
-<span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;arg_name&quot;</span><span class="p">,</span> <span class="s2">&quot;console.log(arg_name)&quot;</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;direct assigned&#39;</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">newstr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s2">&#34;String instance initialization&#34;</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&#34;arg_name&#34;</span><span class="p">,</span> <span class="s2">&#34;console.log(arg_name)&#34;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span></code></pre></div>
 <ul>
 <li>Inner Object
 JS has two types of inner object:
@@ -978,22 +1228,18 @@ JS has two types of inner object:
 <li>run-time object / host object, eg: <code>window, document</code></li>
 </ul></li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span><span class="nx">k</span><span class="o">:</span><span class="s1">&#39;record&#39;</span><span class="p">,</span> <span class="nx">v</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]}</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span><span class="nx">k</span><span class="o">:</span><span class="s1">&#39;record&#39;</span><span class="p">,</span> <span class="nx">v</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]}</span>
 <span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
-<span class="nx">bar</span><span class="p">.</span><span class="nx">k</span> <span class="o">=</span> <span class="s1">&#39;record&#39;</span><span class="p">;</span>
-</code></pre></div>
-
+<span class="nx">bar</span><span class="p">.</span><span class="nx">k</span> <span class="o">=</span> <span class="s1">&#39;record&#39;</span><span class="p">;</span></code></pre></div>
 <ul>
 <li>JSON Object
 JS can creates objects via JSON objects.<br />
 And JS can turn Object instance to JSON object.</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">k</span> <span class="o">=</span> <span class="s1">&#39;record&#39;</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">v</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span> <span class="p">}</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">k</span> <span class="o">=</span> <span class="s1">&#39;record&#39;</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">v</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span> <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">Bar</span><span class="p">()</span> <span class="p">{}</span>
 <span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">k</span> <span class="o">=</span> <span class="s1">&#39;record&#39;</span><span class="p">;</span>
-<span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">v</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span>
-</code></pre></div>
-
+<span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">v</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span></code></pre></div>
 <ul>
 <li>Customized Object
 <code>Function</code> can be used to create customized object.
@@ -1058,7 +1304,7 @@ Memory management is done indirectly via breaking references.</p>
 <h2 id="array">Array</h2>
 
 <h3 id="array-loop">Array Loop</h3>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">;</span>
 
@@ -1070,9 +1316,7 @@ Memory management is done indirectly via breaking references.</p>
 
 <span class="nx">arr</span><span class="p">.</span><span class="nx">every</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">e</span><span class="p">});</span>
 
-<span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">e</span><span class="p">});</span>
-</code></pre></div>
-
+<span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">e</span><span class="p">});</span></code></pre></div>
     
         
 
@@ -1700,7 +1944,7 @@ app.use('/birds', birds)
 <h3 id="1-建立数据库连接-createconnection-object">1. 建立数据库连接 createConnection(Object)</h3>
 
 <p>该方法接受一个对象作为参数，该对象有四个常用的属性host，user，password，database。与php中链接数据库的参数相同。属性列表如下：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">host</span><span class="o">:</span> <span class="nx">连接数据库所在的主机名</span><span class="p">.</span> <span class="p">(</span><span class="nx">默认</span><span class="o">:</span> <span class="nx">localhost</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">host</span><span class="o">:</span> <span class="nx">连接数据库所在的主机名</span><span class="p">.</span> <span class="p">(</span><span class="nx">默认</span><span class="o">:</span> <span class="nx">localhost</span><span class="p">)</span>
 <span class="nx">port</span><span class="o">:</span> <span class="nx">连接端口</span><span class="p">.</span> <span class="p">(</span><span class="nx">默认</span><span class="o">:</span> <span class="mi">3306</span><span class="p">)</span>
 <span class="nx">localAddress</span><span class="o">:</span> <span class="nx">用于TCP连接的IP地址</span><span class="p">.</span> <span class="p">(</span><span class="nx">可选</span><span class="p">)</span>
 <span class="nx">socketPath</span><span class="o">:</span> <span class="nx">链接到unix域的路径</span><span class="err">。</span><span class="nx">在使用host和port时该参数会被忽略</span><span class="p">.</span>
@@ -1719,10 +1963,8 @@ app.use('/birds', birds)
 <span class="nx">debug</span><span class="o">:</span> <span class="nx">是否开启调试</span><span class="p">.</span> <span class="p">(</span><span class="nx">默认</span><span class="o">:</span> <span class="kc">false</span><span class="p">)</span>
 <span class="nx">multipleStatements</span><span class="o">:</span> <span class="nx">是否允许在一个query中传递多个查询语句</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="kc">false</span><span class="p">)</span>
 <span class="nx">flags</span><span class="o">:</span> <span class="nx">链接标志</span><span class="p">.</span>
-<span class="c1">// 还可以使用字符串连接数据库</span>
-<span class="kd">var</span> <span class="nx">connection</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">(</span><span class="s1">&#39;mysql://user:pass@host/db?debug=true&amp;charset=BIG5_CHINESE_CI&amp;timezone=-0700&#39;</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="c1">// 还可以使用字符串连接数据库
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">connection</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">(</span><span class="s1">&#39;mysql://user:pass@host/db?debug=true&amp;charset=BIG5_CHINESE_CI&amp;timezone=-0700&#39;</span><span class="p">);</span></code></pre></div>
 <h3 id="2-结束数据库连接-end-destroy">2 结束数据库连接 end() destroy()</h3>
 
 <p>end()接受一个回调函数，并且会在query结束之后才触发，如果query出错，仍然会终止链接，错误会传递到回调函数中处理。</p>
@@ -1733,79 +1975,69 @@ app.use('/birds', birds)
 
 <p>Object和createConnection参数相同
 可以监听connection事件，并设置session值</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">pool</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="p">{</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">pool</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="p">{</span>  
     <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SET SESSION auto_increment_increment=1&#39;</span><span class="p">)</span>  
-<span class="p">});</span>
-</code></pre></div>
-
+<span class="p">});</span></code></pre></div>
 <p>connection.release()释放链接到连接池。如果需要关闭连接并且删除，需要使用connection.destroy()<br />
 pool除了接受和connection相同的参数外，还接受几个扩展的参数</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">createConnection</span><span class="o">:</span> <span class="nx">用于创建链接的函数</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">)</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">createConnection</span><span class="o">:</span> <span class="nx">用于创建链接的函数</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">)</span>  
 <span class="nx">waitForConnections</span><span class="o">:</span> <span class="nx">决定当没有连接池或者链接数打到最大值时pool的行为</span><span class="p">.</span> <span class="nx">为true时链接会被放入队列中在可用是调用</span><span class="err">，</span><span class="nx">为false时会立即返回error</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="kc">true</span><span class="p">)</span>  
 <span class="nx">connectionLimit</span><span class="o">:</span> <span class="nx">最大连接数</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="mi">10</span><span class="p">)</span>  
-<span class="nx">queueLimit</span><span class="o">:</span> <span class="nx">连接池中连接请求的烈的最大长度</span><span class="err">，</span><span class="nx">超过这个长度就会报错</span><span class="err">，</span><span class="nx">值为0时没有限制</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="mi">0</span><span class="p">)</span>  
-</code></pre></div>
-
+<span class="nx">queueLimit</span><span class="o">:</span> <span class="nx">连接池中连接请求的烈的最大长度</span><span class="err">，</span><span class="nx">超过这个长度就会报错</span><span class="err">，</span><span class="nx">值为0时没有限制</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="mi">0</span><span class="p">)</span>  </code></pre></div>
 <h3 id="4-连接池集群">4. 连接池集群</h3>
 
 <p>允许不同的host链接</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// create</span>
-<span class="kd">var</span> <span class="nx">poolCluster</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createPoolCluster</span><span class="p">();</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// create
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">poolCluster</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createPoolCluster</span><span class="p">();</span>
 
-<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span> <span class="c1">// anonymous group</span>
-<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;MASTER&#39;</span><span class="p">,</span> <span class="nx">masterConfig</span><span class="p">);</span>
+<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span> <span class="c1">// anonymous group
+</span><span class="c1"></span><span class="nx">poolCluster</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;MASTER&#39;</span><span class="p">,</span> <span class="nx">masterConfig</span><span class="p">);</span>
 <span class="nx">poolCluster</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;SLAVE1&#39;</span><span class="p">,</span> <span class="nx">slave1Config</span><span class="p">);</span>
 <span class="nx">poolCluster</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;SLAVE2&#39;</span><span class="p">,</span> <span class="nx">slave2Config</span><span class="p">);</span>
 
-<span class="c1">// Target Group : ALL(anonymous, MASTER, SLAVE1-2), Selector : round-robin(default)</span>
-<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
+<span class="c1">// Target Group : ALL(anonymous, MASTER, SLAVE1-2), Selector : round-robin(default)
+</span><span class="c1"></span><span class="nx">poolCluster</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
 
-<span class="c1">// Target Group : MASTER, Selector : round-robin</span>
-<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="s1">&#39;MASTER&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
+<span class="c1">// Target Group : MASTER, Selector : round-robin
+</span><span class="c1"></span><span class="nx">poolCluster</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="s1">&#39;MASTER&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
 
-<span class="c1">// Target Group : SLAVE1-2, Selector : order</span>
-<span class="c1">// If can&#39;t connect to SLAVE1, return SLAVE2. (remove SLAVE1 in the cluster)</span>
-<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nodeId</span><span class="p">)</span> <span class="p">{</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;REMOVED NODE : &#39;</span> <span class="o">+</span> <span class="nx">nodeId</span><span class="p">);</span> <span class="c1">// nodeId = SLAVE1 </span>
-<span class="p">});</span>
+<span class="c1">// Target Group : SLAVE1-2, Selector : order
+</span><span class="c1">// If can&#39;t connect to SLAVE1, return SLAVE2. (remove SLAVE1 in the cluster)
+</span><span class="c1"></span><span class="nx">poolCluster</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nodeId</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;REMOVED NODE : &#39;</span> <span class="o">+</span> <span class="nx">nodeId</span><span class="p">);</span> <span class="c1">// nodeId = SLAVE1 
+</span><span class="c1"></span><span class="p">});</span>
 
 <span class="nx">poolCluster</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="s1">&#39;SLAVE*&#39;</span><span class="p">,</span> <span class="s1">&#39;ORDER&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
 
-<span class="c1">// of namespace : of(pattern, selector)</span>
-<span class="nx">poolCluster</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">).</span><span class="nx">getConnection</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
+<span class="c1">// of namespace : of(pattern, selector)
+</span><span class="c1"></span><span class="nx">poolCluster</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">).</span><span class="nx">getConnection</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
 
 <span class="kd">var</span> <span class="nx">pool</span> <span class="o">=</span> <span class="nx">poolCluster</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="s1">&#39;SLAVE*&#39;</span><span class="p">,</span> <span class="s1">&#39;RANDOM&#39;</span><span class="p">);</span>
 <span class="nx">pool</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
 <span class="nx">pool</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connection</span><span class="p">)</span> <span class="p">{});</span>
 
-<span class="c1">// destroy</span>
-<span class="nx">poolCluster</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</code></pre></div>
-
+<span class="c1">// destroy
+</span><span class="c1"></span><span class="nx">poolCluster</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span></code></pre></div>
 <p>链接集群的可选参数</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">canRetry</span><span class="o">:</span> <span class="nx">值为true时</span><span class="err">，</span><span class="nx">允许连接失败时重试</span><span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="kc">true</span><span class="p">)</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">canRetry</span><span class="o">:</span> <span class="nx">值为true时</span><span class="err">，</span><span class="nx">允许连接失败时重试</span><span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="kc">true</span><span class="p">)</span>  
 <span class="nx">removeNodeErrorCount</span><span class="o">:</span> <span class="nx">当连接失败时</span> <span class="nx">errorCount</span> <span class="nx">值会增加</span><span class="p">.</span> <span class="nx">当errorCount</span> <span class="nx">值大于</span> <span class="nx">removeNodeErrorCount</span> <span class="nx">将会从PoolCluster中删除一个节点</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="mi">5</span><span class="p">)</span>  
 <span class="nx">defaultSelector</span><span class="o">:</span> <span class="nx">默认选择器</span><span class="p">.</span> <span class="p">(</span><span class="nx">Default</span><span class="o">:</span> <span class="nx">RR</span><span class="p">)</span>  
 <span class="nx">RR</span><span class="o">:</span> <span class="nx">循环</span><span class="p">.</span> <span class="p">(</span><span class="nx">Round</span><span class="o">-</span><span class="nx">Robin</span><span class="p">)</span>  
 <span class="nx">RANDOM</span><span class="o">:</span> <span class="nx">通过随机函数选择节点</span><span class="p">.</span>  
-<span class="nx">ORDER</span><span class="o">:</span> <span class="nx">无条件地选择第一个可用节点</span><span class="p">.</span>  
-</code></pre></div>
-
+<span class="nx">ORDER</span><span class="o">:</span> <span class="nx">无条件地选择第一个可用节点</span><span class="p">.</span>  </code></pre></div>
 <h3 id="5-切换用户-改变连接状态">5. 切换用户 / 改变连接状态</h3>
 
 <p>Mysql允许在比断开连接的的情况下切换用户</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">connection</span><span class="p">.</span><span class="nx">changeUser</span><span class="p">({</span><span class="nx">user</span> <span class="o">:</span> <span class="s1">&#39;john&#39;</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">connection</span><span class="p">.</span><span class="nx">changeUser</span><span class="p">({</span><span class="nx">user</span> <span class="o">:</span> <span class="s1">&#39;john&#39;</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
     <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>  
 <span class="p">});</span>  
-<span class="c1">// 参数  </span>
-<span class="nx">user</span><span class="o">:</span> <span class="nx">新的用户</span> <span class="p">(</span><span class="nx">默认为早前的一个</span><span class="p">).</span>  
+<span class="c1">// 参数  
+</span><span class="c1"></span><span class="nx">user</span><span class="o">:</span> <span class="nx">新的用户</span> <span class="p">(</span><span class="nx">默认为早前的一个</span><span class="p">).</span>  
 <span class="nx">password</span><span class="o">:</span> <span class="nx">新用户的新密码</span> <span class="p">(</span><span class="nx">默认为早前的一个</span><span class="p">).</span>  
 <span class="nx">charset</span><span class="o">:</span> <span class="nx">新字符集</span> <span class="p">(</span><span class="nx">默认为早前的一个</span><span class="p">).</span>  
-<span class="nx">database</span><span class="o">:</span> <span class="nx">新数据库名称</span> <span class="p">(</span><span class="nx">默认为早前的一个</span><span class="p">).</span>  
-</code></pre></div>
-
+<span class="nx">database</span><span class="o">:</span> <span class="nx">新数据库名称</span> <span class="p">(</span><span class="nx">默认为早前的一个</span><span class="p">).</span>  </code></pre></div>
 <h3 id="6-处理服务器连接断开">6. 处理服务器连接断开</h3>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">db_config</span> <span class="o">=</span> <span class="p">{</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">db_config</span> <span class="o">=</span> <span class="p">{</span>  
         <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>  
         <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>  
         <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  
@@ -1815,92 +2047,86 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
 <span class="kd">var</span> <span class="nx">connection</span><span class="p">;</span>  
 
 <span class="kd">function</span> <span class="nx">handleDisconnect</span><span class="p">()</span> <span class="p">{</span>  
-  <span class="nx">connection</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">(</span><span class="nx">db_config</span><span class="p">);</span> <span class="c1">// Recreate the connection, since  </span>
-                                                  <span class="c1">// the old one cannot be reused.  </span>
-
-  <span class="nx">connection</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// The server is either down  </span>
-    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>                                     <span class="c1">// or restarting (takes a while sometimes).  </span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error when connecting to db:&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>  
-      <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">handleDisconnect</span><span class="p">,</span> <span class="mi">2000</span><span class="p">);</span> <span class="c1">// We introduce a delay before attempting to reconnect,  </span>
-    <span class="p">}</span>                                     <span class="c1">// to avoid a hot loop, and to allow our node script to  </span>
-  <span class="p">});</span>                                     <span class="c1">// process asynchronous requests in the meantime.  </span>
-                                          <span class="c1">// If you&#39;re also serving http, display a 503 error.  </span>
-  <span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="nx">connection</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">(</span><span class="nx">db_config</span><span class="p">);</span> <span class="c1">// Recreate the connection, since  
+</span><span class="c1"></span>                                                  <span class="c1">// the old one cannot be reused.  
+</span><span class="c1"></span>
+  <span class="nx">connection</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// The server is either down  
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>                                     <span class="c1">// or restarting (takes a while sometimes).  
+</span><span class="c1"></span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error when connecting to db:&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>  
+      <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">handleDisconnect</span><span class="p">,</span> <span class="mi">2000</span><span class="p">);</span> <span class="c1">// We introduce a delay before attempting to reconnect,  
+</span><span class="c1"></span>    <span class="p">}</span>                                     <span class="c1">// to avoid a hot loop, and to allow our node script to  
+</span><span class="c1"></span>  <span class="p">});</span>                                     <span class="c1">// process asynchronous requests in the meantime.  
+</span><span class="c1"></span>                                          <span class="c1">// If you&#39;re also serving http, display a 503 error.  
+</span><span class="c1"></span>  <span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;db error&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>  
-    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s1">&#39;PROTOCOL_CONNECTION_LOST&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Connection to the MySQL server is usually  </span>
-      <span class="nx">handleDisconnect</span><span class="p">();</span>                         <span class="c1">// lost due to either server restart, or a  </span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>                                      <span class="c1">// connnection idle timeout (the wait_timeout  </span>
-      <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>                                  <span class="c1">// server variable configures this)  </span>
-    <span class="p">}</span>  
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s1">&#39;PROTOCOL_CONNECTION_LOST&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Connection to the MySQL server is usually  
+</span><span class="c1"></span>      <span class="nx">handleDisconnect</span><span class="p">();</span>                         <span class="c1">// lost due to either server restart, or a  
+</span><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>                                      <span class="c1">// connnection idle timeout (the wait_timeout  
+</span><span class="c1"></span>      <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>                                  <span class="c1">// server variable configures this)  
+</span><span class="c1"></span>    <span class="p">}</span>  
   <span class="p">});</span>  
 <span class="p">}</span>  
 
-<span class="nx">handleDisconnect</span><span class="p">();</span>  
-</code></pre></div>
-
+<span class="nx">handleDisconnect</span><span class="p">();</span>  </code></pre></div>
 <h3 id="7-转义查询值">7. 转义查询值</h3>
 
 <p>为了避免SQL注入攻击，需要转义用户提交的数据。可以使用connection.escape() 或者 pool.escape()</p>
 
 <p>如</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">userId</span> <span class="o">=</span> <span class="s1">&#39;some user provided value&#39;</span><span class="p">;</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">userId</span> <span class="o">=</span> <span class="s1">&#39;some user provided value&#39;</span><span class="p">;</span>  
 <span class="kd">var</span> <span class="nx">sql</span>    <span class="o">=</span> <span class="s1">&#39;SELECT * FROM users WHERE id = &#39;</span> <span class="o">+</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">escape</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>  
 <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>  
-  <span class="c1">// ...  </span>
-<span class="p">});</span>  
+  <span class="c1">// ...  
+</span><span class="c1"></span><span class="p">});</span>  
 <span class="nx">或者使用</span><span class="err">？</span><span class="nx">作为占位符</span>  
 <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM users WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userId</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>  
-  <span class="c1">// ...  </span>
-<span class="p">});</span>  
+  <span class="c1">// ...  
+</span><span class="c1"></span><span class="p">});</span>  
 <span class="nx">不同类型值的转换结果</span>  
 <span class="nx">Numbers</span> <span class="nx">不变</span>  
-<span class="nx">Booleans</span> <span class="nx">转换为字符串</span> <span class="s1">&#39;true&#39;</span> <span class="o">/</span> <span class="s1">&#39;false&#39;</span>   
+<span class="nx">Booleans</span> <span class="nx">转换为字符串</span> <span class="s1">&#39;true&#39;</span> <span class="err">/ &#39;false&#39;   </span>
 <span class="nb">Date</span> <span class="nx">对象转换为字符串</span> <span class="s1">&#39;YYYY-mm-dd HH:ii:ss&#39;</span>  
 <span class="nx">Buffers</span> <span class="nx">转换为是6进制字符串</span>  
 <span class="nx">Strings</span> <span class="nx">不变</span>  
 <span class="nx">Arrays</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="nx">转换为</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span>  
 <span class="nx">嵌套数组</span> <span class="p">[[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]]</span> <span class="nx">转换为</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>  
 <span class="nx">Objects</span> <span class="nx">转换为</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;val&#39;</span> <span class="nx">pairs</span><span class="p">.</span> <span class="nx">嵌套对象转换为字符串</span><span class="p">.</span>  
-<span class="kc">undefined</span> <span class="o">/</span> <span class="kc">null</span> <span class="o">===&gt;</span> <span class="nx">NULL</span>  
-<span class="kc">NaN</span> <span class="o">/</span> <span class="kc">Infinity</span> <span class="nx">不变</span><span class="p">.</span> <span class="nx">MySQL</span> <span class="nx">不支持这些值</span><span class="p">,</span>  <span class="nx">除非有工具支持</span><span class="err">，</span><span class="nx">否则插入这些值会引起错误</span><span class="p">.</span>  
+<span class="kc">undefined</span> <span class="err">/ null ===&gt; NULL  </span>
+<span class="kc">NaN</span> <span class="err">/ Infinity 不变. MySQL 不支持这些值,  除非有工具支持，否则插入这些值会引起错误.  </span>
 <span class="nx">转换实例</span><span class="err">：</span>  
 <span class="kd">var</span> <span class="nx">post</span>  <span class="o">=</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Hello MySQL&#39;</span><span class="p">};</span>  
 <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;INSERT INTO posts SET ?&#39;</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>  
-  <span class="c1">// Neat!  </span>
-<span class="p">});</span>  
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span> <span class="c1">// INSERT INTO posts SET `id` = 1, `title` = &#39;Hello MySQL&#39;  </span>
-<span class="nx">或者手动转换</span>  
-<span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM posts WHERE title=&quot;</span> <span class="o">+</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">escape</span><span class="p">(</span><span class="s2">&quot;Hello MySQL&quot;</span><span class="p">);</span>  
+  <span class="c1">// Neat!  
+</span><span class="c1"></span><span class="p">});</span>  
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span> <span class="c1">// INSERT INTO posts SET `id` = 1, `title` = &#39;Hello MySQL&#39;  
+</span><span class="c1"></span><span class="nx">或者手动转换</span>  
+<span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="s2">&#34;SELECT * FROM posts WHERE title=&#34;</span> <span class="o">+</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">escape</span><span class="p">(</span><span class="s2">&#34;Hello MySQL&#34;</span><span class="p">);</span>  
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span> <span class="c1">// SELECT * FROM posts WHERE title=&#39;Hello MySQL&#39;  </span>
-</code></pre></div>
-
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span> <span class="err">// SELECT * FROM posts WHERE title=&#39;Hello MySQL&#39;  </span></code></pre></div>
 <h3 id="8-转换查询标识符">8. 转换查询标识符</h3>
 
 <p>如果不能信任SQL标识符(数据库名、表名、列名)，可以使用转换方法mysql.escapeId(identifier)；</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">sorter</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">sorter</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>  
 <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM posts ORDER BY &#39;</span> <span class="o">+</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">escapeId</span><span class="p">(</span><span class="nx">sorter</span><span class="p">);</span>  
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span> <span class="c1">// SELECT * FROM posts ORDER BY `date`  </span>
-<span class="nx">支持转义多个</span>  
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span> <span class="c1">// SELECT * FROM posts ORDER BY `date`  
+</span><span class="c1"></span><span class="nx">支持转义多个</span>  
 <span class="kd">var</span> <span class="nx">sorter</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>  
 <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM posts ORDER BY &#39;</span> <span class="o">+</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">escapeId</span><span class="p">(</span><span class="s1">&#39;posts.&#39;</span> <span class="o">+</span> <span class="nx">sorter</span><span class="p">);</span>  
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span> <span class="c1">// SELECT * FROM posts ORDER BY `posts`.`date`  </span>
-<span class="nx">可以使用</span><span class="o">??</span><span class="nx">作为标识符的占位符</span>  
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span> <span class="c1">// SELECT * FROM posts ORDER BY `posts`.`date`  
+</span><span class="c1"></span><span class="nx">可以使用</span><span class="o">??</span><span class="nx">作为标识符的占位符</span>  
 <span class="kd">var</span> <span class="nx">userId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  
 <span class="kd">var</span> <span class="nx">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">];</span>  
 <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT ?? FROM ?? WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">columns</span><span class="p">,</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="nx">userId</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>  
-  <span class="c1">// ...  </span>
-<span class="p">});</span>  
+  <span class="c1">// ...  
+</span><span class="c1"></span><span class="p">});</span>  
   
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span> <span class="c1">// SELECT `username`, `email` FROM `users` WHERE id = 1  </span>
-</code></pre></div>
-
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span> <span class="err">// SELECT `username`, `email` FROM `users` WHERE id = 1  </span></code></pre></div>
 <h3 id="9-准备查询">9. 准备查询</h3>
 
 <p>可以使用mysql.format来准备查询语句，该函数会自动的选择合适的方法转义参数。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM ?? WHERE ?? = ?&quot;</span><span class="p">;</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="s2">&#34;SELECT * FROM ?? WHERE ?? = ?&#34;</span><span class="p">;</span>  
 <span class="kd">var</span> <span class="nx">inserts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nx">userId</span><span class="p">];</span>  
 <span class="nx">sql</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span> <span class="nx">inserts</span><span class="p">);</span>  
 <span class="mi">10</span><span class="err">、</span><span class="nx">自定义格式化函数</span>  
@@ -1914,73 +2140,65 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
   <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>  
 <span class="p">};</span>  
 
-<span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;UPDATE posts SET title = :title&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Hello MySQL&quot;</span> <span class="p">});</span>  
-</code></pre></div>
-
+<span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&#34;UPDATE posts SET title = :title&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;Hello MySQL&#34;</span> <span class="p">});</span>  </code></pre></div>
 <h3 id="11-获取插入行的id">11. 获取插入行的id</h3>
 
 <p>当使用自增主键时获取插入行id，如：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;INSERT INTO posts SET ?&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;test&#39;</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;INSERT INTO posts SET ?&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;test&#39;</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>  
   <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>  
 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">insertId</span><span class="p">);</span>  
-<span class="p">});</span>  
-</code></pre></div>
-
+<span class="p">});</span>  </code></pre></div>
 <h3 id="12-流处理">12. 流处理</h3>
 
 <p>有时你希望选择大量的行并且希望在数据到达时就处理他们，你就可以使用这个方法</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM posts&#39;</span><span class="p">);</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM posts&#39;</span><span class="p">);</span>  
 <span class="nx">query</span>  
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
-      <span class="c1">// Handle error, an &#39;end&#39; event will be emitted after this as well  </span>
-    <span class="p">})</span>  
+      <span class="c1">// Handle error, an &#39;end&#39; event will be emitted after this as well  
+</span><span class="c1"></span>    <span class="p">})</span>  
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fields</span><span class="p">)</span> <span class="p">{</span>  
-      <span class="c1">// the field packets for the rows to follow  </span>
-    <span class="p">})</span>  
+      <span class="c1">// the field packets for the rows to follow  
+</span><span class="c1"></span>    <span class="p">})</span>  
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">row</span><span class="p">)</span> <span class="p">{</span>  
-      <span class="c1">// Pausing the connnection is useful if your processing involves I/O  </span>
-      <span class="nx">connection</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>  
+      <span class="c1">// Pausing the connnection is useful if your processing involves I/O  
+</span><span class="c1"></span>      <span class="nx">connection</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>  
   
       <span class="nx">processRow</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>  
         <span class="nx">connection</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>  
       <span class="p">});</span>  
     <span class="p">})</span>  
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>  
-      <span class="c1">// all rows have been received  </span>
-    <span class="p">});</span>  
-</code></pre></div>
-
+      <span class="c1">// all rows have been received  
+</span><span class="c1"></span>    <span class="p">});</span>  </code></pre></div>
 <h3 id="13-多语句-混合查询">13. 多语句/混合查询</h3>
 
 <p>因为混合查询容易被SQL注入攻击，默认是不允许的，可以使用var connection = mysql.createConnection({multipleStatements: true});开启该功能。
  混合查询实例：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT 1; SELECT 2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT 1; SELECT 2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>  
   <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>  
 
-  <span class="c1">// `results` is an array with one element for every statement in the query:  </span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// [{1: 1}]  </span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// [{2: 2}]  </span>
-<span class="p">});</span>  
+  <span class="c1">// `results` is an array with one element for every statement in the query:  
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// [{1: 1}]  
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// [{2: 2}]  
+</span><span class="c1"></span><span class="p">});</span>  
 
-<span class="c1">// 同样可以使用流处理混合查询结果：</span>
-<span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT 1; SELECT 2&#39;</span><span class="p">);</span>  
+<span class="c1">// 同样可以使用流处理混合查询结果：
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;SELECT 1; SELECT 2&#39;</span><span class="p">);</span>  
 <span class="nx">query</span>  
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fields</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>  
-      <span class="c1">// the fields for the result rows that follow  </span>
-    <span class="p">})</span>  
+      <span class="c1">// the fields for the result rows that follow  
+</span><span class="c1"></span>    <span class="p">})</span>  
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>  
-      <span class="c1">// index refers to the statement this result belongs to (starts at 0)  </span>
-    <span class="p">});</span>  
-</code></pre></div>
-
+      <span class="c1">// index refers to the statement this result belongs to (starts at 0)  
+</span><span class="c1"></span>    <span class="p">});</span>  </code></pre></div>
 <p>如果其中一个查询语句出错，Error对象会包含err.index指示错误语句的id，整个查询也会终止。
 混合查询结果的流处理方式是做实验性的，不稳定。</p>
 
 <h3 id="14-事务处理">14. 事务处理</h3>
 
 <p>connection级别的简单事务处理</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">connection</span><span class="p">.</span><span class="nx">beginTransaction</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">connection</span><span class="p">.</span><span class="nx">beginTransaction</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>  
   <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span> <span class="p">}</span>  
   <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;INSERT INTO posts SET title=?&#39;</span><span class="p">,</span> <span class="nx">title</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>  
     <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>   
@@ -2007,14 +2225,10 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
       <span class="p">});</span>  
     <span class="p">});</span>  
   <span class="p">});</span>  
-<span class="p">});</span>  
-</code></pre></div>
-
+<span class="p">});</span>  </code></pre></div>
 <h3 id="15-错误处理">15. 错误处理</h3>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span> <span class="o">=</span> <span class="nx">string</span>  
-<span class="nx">err</span><span class="p">.</span><span class="nx">fatal</span> <span class="p">=&gt;</span> <span class="kr">boolean</span>  
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">err</span><span class="p">.</span><span class="nx">code</span> <span class="o">=</span> <span class="nx">string</span>  
+<span class="nx">err</span><span class="p">.</span><span class="nx">fatal</span> <span class="p">=&gt;</span> <span class="kr">boolean</span>  </code></pre></div>
     
         
 
@@ -2034,52 +2248,42 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
 <ul>
 <li>对象实例</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">record</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s2">&quot;&quot;</span> <span class="p">};</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">record</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s2">&#34;&#34;</span> <span class="p">};</span></code></pre></div>
 <p>Schema 规格</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s2">&quot;China&quot;</span> <span class="p">};</span>
-<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Beta, nation: &quot;</span><span class="nx">Denmark</span><span class="err">&quot;</span> <span class="p">};</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Alpha&#34;</span><span class="p">,</span> <span class="nx">nation</span><span class="o">:</span> <span class="s2">&#34;China&#34;</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Beta, nation: &#34;</span><span class="nx">Denmark</span><span class="err">&#34;</span> <span class="p">};</span></code></pre></div>
 <p>给对象赋予属性和方法</p>
 
 <p>这可以看作最简单的封装，但原型和实例间并不存在内在联系。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
         <span class="nx">nation</span><span class="o">:</span> <span class="nx">nation</span><span class="p">,</span>
     <span class="p">};</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&#34;Alpha&#34;</span><span class="p">,</span> <span class="s2">&#34;China&#34;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&#34;Beta&#34;</span><span class="p">,</span> <span class="s2">&#34;Denmark&#34;</span><span class="p">);</span></code></pre></div>
 <p>用函数调用返回对象方式可以在原型和实例间建立一定联系，但两个实例间没有内在联系。</p>
 
 <ul>
 <li>构造函数模式</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">nation</span> <span class="o">=</span> <span class="nx">nation</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&#34;Alpha&#34;</span><span class="p">,</span> <span class="s2">&#34;China&#34;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&#34;Beta&#34;</span><span class="p">,</span> <span class="s2">&#34;Denmark&#34;</span><span class="p">);</span></code></pre></div>
 <p>Javascript 提供了 Constructor 构造函数模式。构造函数是使用了 this 变量的普通函数，在使用 new 运算符生成实例时，this 会绑定到对象实例上，使 <code>foo.constructor == Foo</code>。JS 中的 instanceof 运算符可以验证原型与实例对象间的关系，<code>(foo instanceof Foo) == true</code>。</p>
 
 <ul>
 <li>原型模式 prototype</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">nation</span> <span class="o">=</span> <span class="nx">nation</span><span class="p">;</span> <span class="p">}</span>
-<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="s2">&quot;human&quot;</span><span class="p">;</span>
-<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="p">};</span>
-<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">);</span> <span class="c1">// with `species` and `greet()`</span>
-<span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;Denmark&quot;</span><span class="p">);</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">nation</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">nation</span> <span class="o">=</span> <span class="nx">nation</span><span class="p">;</span> <span class="p">}</span>
+<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="s2">&#34;human&#34;</span><span class="p">;</span>
+<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;hello&#34;</span><span class="p">)</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">record1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&#34;Alpha&#34;</span><span class="p">,</span> <span class="s2">&#34;China&#34;</span><span class="p">);</span> <span class="c1">// with `species` and `greet()`
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">record2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Record</span><span class="p">(</span><span class="s2">&#34;Beta&#34;</span><span class="p">,</span> <span class="s2">&#34;Denmark&#34;</span><span class="p">);</span></code></pre></div>
 <p>构造函数模式的问题在于原型中的属性和方法在每个实例中都要创建。其中重复的内容就额外地占用的资源。JS 中每个构造函数都有 prototype 属性，指向另一个对象；所指向对象的属性和方法都被构造函数继承。</p>
 
 <p>这样，不变的属性和方法可以直接定义在 prototype 对象上。在例子中，所有实例的 species 和 greet() 方法都指向相同的地址，即 prototype 对象。</p>
@@ -2100,10 +2304,8 @@ pool除了接受和connection相同的参数外，还接受几个扩展的参数
 </ul>
 
 <h3 id="继承对象">继承对象</h3>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Record&quot;</span> <span class="p">}</span>
-<span class="kd">function</span> <span class="nx">Personnel</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">dept</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">dept</span> <span class="o">=</span> <span class="nx">dept</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Record</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&#34;Record&#34;</span> <span class="p">}</span>
+<span class="kd">function</span> <span class="nx">Personnel</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">dept</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="nx">dept</span> <span class="o">=</span> <span class="nx">dept</span><span class="p">;</span> <span class="p">}</span></code></pre></div>
 <p>对象间继承的方法。</p>
 
 <ul>
@@ -2134,32 +2336,28 @@ JS 的函数对象可以将不变属性放在 prototype 中，对于只使用不
 <code>Personnel.prototype = new F();</code><br />
 <code>Personnel.prototype.constructor = Personnel;</code></p></li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// YUI extend function</span>
-<span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// YUI extend function
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
     <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
     <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
     <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Child</span><span class="p">;</span>
     <span class="nx">Child</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nx">extend</span><span class="p">(</span><span class="nx">Personnel</span><span class="p">,</span> <span class="nx">Record</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="nx">extend</span><span class="p">(</span><span class="nx">Personnel</span><span class="p">,</span> <span class="nx">Record</span><span class="p">);</span></code></pre></div>
 <p>可以对这个方式进行封装。如 YUI 库实现继承的方法。</p>
 
 <ul>
 <li>copy<br />
 就是将所有父类的属性和方法在子类中复制一份。</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">Record</span><span class="p">()</span> <span class="p">{}</span>
-<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Record&quot;</span><span class="p">;</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Record</span><span class="p">()</span> <span class="p">{}</span>
+<span class="nx">Record</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&#34;Record&#34;</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> 
     <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
         <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
     <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></div>
 <hr />
 
 <h3 id="一般对象继承">一般对象继承</h3>
@@ -2170,36 +2368,32 @@ JS 的函数对象可以将不变属性放在 prototype 中，对于只使用不
 <ul>
 <li>通过 object 函数</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">object</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">object</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
     <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">Personnel</span> <span class="o">=</span> <span class="nx">object</span><span class="p">(</span><span class="nx">Record</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="kd">let</span> <span class="nx">Personnel</span> <span class="o">=</span> <span class="nx">object</span><span class="p">(</span><span class="nx">Record</span><span class="p">);</span></code></pre></div>
 <ul>
 <li>浅复制</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{};</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span>
         <span class="nx">c</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
     <span class="nx">c</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
     <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">Personnel</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Record</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="kd">let</span> <span class="nx">Personnel</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Record</span><span class="p">);</span></code></pre></div>
 <p>浅复制在父对象的成员也是对象时，会把对象地址复制给子类，造成子类可以修改父类。</p>
 
 <ul>
 <li>深复制</li>
 </ul>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">Parent</span><span class="p">,</span> <span class="nx">Child</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">Parent</span><span class="p">,</span> <span class="nx">Child</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">Child</span> <span class="o">=</span> <span class="nx">Child</span> <span class="o">||</span> <span class="p">{};</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&#34;object&#34;</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">Child</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">Array</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="p">{};</span>
             <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">Parent</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">Child</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -2207,9 +2401,7 @@ JS 的函数对象可以将不变属性放在 prototype 中，对于只使用不
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">Child</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></div>
     
         
 
@@ -3216,7 +3408,7 @@ Local Variables (no prefix) :</p>
 <p>Local variables needs to be declared using DECLARE before accessing it.</p>
 
 <p>They can be used as local variables and the input parameters inside a stored procedure:</p>
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span></span><span class="k">DELIMITER</span> <span class="o">//</span>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DELIMITER</span> <span class="o">//</span>
 
 <span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">sp_test</span><span class="p">(</span><span class="n">var1</span> <span class="nb">INT</span><span class="p">)</span> 
 <span class="k">BEGIN</span>   
@@ -3230,9 +3422,7 @@ Local Variables (no prefix) :</p>
 
 <span class="k">DELIMITER</span> <span class="p">;</span>
 
-<span class="k">CALL</span> <span class="n">sp_test</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</code></pre></div>
-
+<span class="k">CALL</span> <span class="n">sp_test</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span></code></pre></div>
 <p>If the DEFAULT clause is missing, the initial value is NULL.</p>
 
 <p>The scope of a local variable is the BEGIN &hellip; END block within which it is declared.
@@ -3249,17 +3439,15 @@ Server System Variables (prefixed with @@):</p>
 <p>SELECT @@sort_buffer_size;</p>
 
 <p>They can be set at server startup using options on the command line or in an option file. Most of them can be changed dynamically while the server is running using SET GLOBAL or SET SESSION:</p>
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span></span><span class="c1">-- Syntax to Set value to a Global variable:</span>
-<span class="k">SET</span> <span class="k">GLOBAL</span> <span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- Syntax to Set value to a Global variable:
+</span><span class="c1"></span><span class="k">SET</span> <span class="k">GLOBAL</span> <span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
 <span class="k">SET</span> <span class="o">@@</span><span class="k">global</span><span class="p">.</span><span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
 
-<span class="c1">-- Syntax to Set value to a Session variable:</span>
-<span class="k">SET</span> <span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
+<span class="c1">-- Syntax to Set value to a Session variable:
+</span><span class="c1"></span><span class="k">SET</span> <span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
 <span class="k">SET</span> <span class="k">SESSION</span> <span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
 <span class="k">SET</span> <span class="o">@@</span><span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
-<span class="k">SET</span> <span class="o">@@</span><span class="k">local</span><span class="p">.</span><span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">;</span>
-</code></pre></div>
-
+<span class="k">SET</span> <span class="o">@@</span><span class="k">local</span><span class="p">.</span><span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">;</span></code></pre></div>
     
         
 
@@ -3414,17 +3602,17 @@ clean:
 <h1 id="python">Python</h1>
 
 <h2 id="class-自带函数">Class 自带函数</h2>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">Foor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Foor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;init&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;new&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;call&#39;</span><span class="p">)</span>
         
 <span class="n">foo</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">()</span>
 <span class="n">foo</span><span class="p">()</span>
@@ -3432,9 +3620,7 @@ clean:
 <span class="c1"># Result:</span>
 <span class="n">new</span>
 <span class="n">init</span>
-<span class="n">call</span>
-</code></pre></div>
-
+<span class="n">call</span></code></pre></div>
 <ul>
 <li><p><code>__init__(self, *args, **kwargs)</code><br />
 在对象创建完成后调用，对当前对象实例进行初始化，无返回值。</p></li>
@@ -3447,17 +3633,11 @@ clean:
 </ul>
 
 <h2 id="用自带函数实现单例">用自带函数实现单例</h2>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">class</span> <span class="nc">MySingleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MySingleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;_instance&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="sa"></span><span class="s1">&#39;_instance&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MySingleton</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
-</code></pre></div>
-
-    
-        
-    
-        
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span></code></pre></div>
     
         
     
